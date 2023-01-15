@@ -8,7 +8,7 @@ import {
   Badge,
   Avatar,
 } from "@mui/material";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import MailIcon from "@mui/icons-material/Mail";
 import { deepPurple } from "@mui/material/colors";

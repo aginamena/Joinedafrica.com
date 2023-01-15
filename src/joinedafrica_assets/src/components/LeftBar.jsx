@@ -6,8 +6,12 @@ import {
   ListItemButton,
   ListItemText,
   Toolbar,
+  ListItemIcon,
+  Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+// import DirectionsCarIcon from "@smui/icons-material/DirectionsCar";
+import { categories } from "../util/ListOfCategories";
 
 export default function LeftBar() {
   const DrawerContainer = styled(Drawer)({
@@ -17,22 +21,17 @@ export default function LeftBar() {
     },
     zIndex: "-1",
   });
+
   return (
     <DrawerContainer variant="permanent" anchor="left">
       <Toolbar />
+      <Typography>All categories</Typography>
       <List>
-        {[
-          "Homepage",
-          "Pages",
-          "Groups",
-          "Marketplace",
-          "Friend",
-          "Settings",
-          "Profile",
-        ].map((text, index) => (
-          <ListItem key={index}>
+        {categories.map((category, index) => (
+          <ListItem key={index} disablePadding>
             <ListItemButton>
-              <ListItemText primary={text} />
+              <ListItemIcon>{category.icon}</ListItemIcon>
+              <ListItemText primary={category.name} />
             </ListItemButton>
           </ListItem>
         ))}
