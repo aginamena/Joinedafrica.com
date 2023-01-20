@@ -3,13 +3,18 @@ import { Container, Box, Typography, Button, Stack } from "@mui/material";
 
 import { Greeting, Introduction } from "../styling/WelcomePage";
 import HowWeStandOut from "./HowWeStandOut";
+import { Link } from "react-router-dom";
 
 export default function WelcomePage() {
   return (
     <Box>
       <Greeting>
         <Typography variant="h6">Welcome to Joined Africa!</Typography>
-        <Button variant="contained">Log in</Button>
+        <Button variant="contained">
+          <Link to="/home" style={{ textDecoration: "none", color: "initial" }}>
+            Log in
+          </Link>
+        </Button>
       </Greeting>
 
       <Introduction>

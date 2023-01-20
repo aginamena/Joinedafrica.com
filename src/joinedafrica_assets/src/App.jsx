@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, CssBaseline } from "@mui/material";
-import Header from "./components/Header";
+import { CssBaseline } from "@mui/material";
 import Body from "./components/Body";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -16,11 +15,10 @@ export default function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      {/* <Header />
-      <Body /> */}
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<WelcomePage />}></Route>
+          <Route exact path="/home" element={<Body />}></Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

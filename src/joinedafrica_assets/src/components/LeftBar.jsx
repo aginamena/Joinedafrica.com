@@ -16,16 +16,20 @@ import { categories } from "../util/ListOfCategories";
 export default function LeftBar() {
   const DrawerContainer = styled(Drawer)({
     "& .MuiDrawer-paper": {
-      width: "240px",
+      width: "300px",
       boxSizing: "border-box",
     },
-    zIndex: "-1",
   });
 
   return (
     <DrawerContainer variant="permanent" anchor="left">
       <Toolbar />
-      <Typography>All categories</Typography>
+      <Typography
+        variant="h5"
+        sx={{ marginTop: "50px", marginBottom: "20px", textAlign: "center" }}
+      >
+        All categories
+      </Typography>
       <List>
         {categories.map((category, index) => (
           <ListItem key={index} disablePadding>

@@ -25,7 +25,7 @@ export default function Header() {
   });
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" sx={{ zIndex: "1201" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Typography variant="h6" component="div">
           Joined Africa
