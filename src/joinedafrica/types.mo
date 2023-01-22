@@ -10,10 +10,16 @@ module {
         images : [Nat8];
     };
 
-    let joined_africa_category : [Text] = [
-        {
-            "categoryName" : "abc";
-            "subcategory" : ["asdf", "sdfasd", "dsf"];
-        },
-    ];
+    //the strucutre of how the posts are organised in the database
+    public type Category = {
+        name : Text;
+        subCategory : [Category];
+    };
+
+    //the structure of how the posts are viewed in the frontend
+    public type ViewCategory = {
+        name : Text;
+        posts : [Post];
+    };
+
 };
