@@ -35,6 +35,8 @@ export type Trie_1 = { 'branch' : Branch_1 } |
   { 'empty' : null };
 export interface ViewCategory { 'name' : string, 'posts' : Array<Post__1> }
 export interface _SERVICE {
-  'getSubCategory' : (arg_0: CategoryName) => Promise<Array<ViewCategory>>,
+  'get_all_subcategory_to_a_category' : (arg_0: CategoryName) => Promise<
+      Array<ViewCategory>
+    >,
   'gets' : () => Promise<Trie>,
 }

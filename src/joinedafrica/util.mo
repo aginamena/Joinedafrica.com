@@ -27,7 +27,7 @@ module {
             return joined_africa_category;
         };
 
-        // given the category name, we return all the posts in that category.
+        // given the category name, we return all the posts in that category alongside with their names
         public func get_all_subcategory_to_a_category(categoryName : CategoryName) : [ViewCategory] {
             let subCategory : ?Trie.Trie<CategoryName, List.List<Post>> = Trie.get(joined_africa_category, key(categoryName), Text.equal);
             return Trie.toArray<CategoryName, List.List<Post>, ViewCategory>(

@@ -3,6 +3,7 @@ import Type "types";
 import Util "util";
 import PostCategory "joined_africa_category";
 import List "mo:base/List";
+import Debug "mo:base/Debug";
 
 actor Backend {
 
@@ -18,6 +19,7 @@ actor Backend {
     return categories.get();
   };
   public query func get_all_subcategory_to_a_category(categoryName : CategoryName) : async [ViewCategory] {
+    Debug.print(debug_show (categoryName));
     return categories.get_all_subcategory_to_a_category(categoryName);
   };
 };

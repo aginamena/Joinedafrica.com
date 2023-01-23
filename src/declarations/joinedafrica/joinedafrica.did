@@ -100,6 +100,7 @@ type AssocList =
        List_2;
      };
 service : {
-  getSubCategory: (CategoryName) -> (vec ViewCategory) query;
+  get_all_subcategory_to_a_category: (CategoryName) ->
+   (vec ViewCategory) query;
   gets: () -> (Trie) query;
 }

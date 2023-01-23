@@ -51,7 +51,7 @@ export const idlFactory = ({ IDL }) => {
     IDL.Variant({ 'branch' : Branch, 'leaf' : Leaf, 'empty' : IDL.Null })
   );
   return IDL.Service({
-    'getSubCategory' : IDL.Func(
+    'get_all_subcategory_to_a_category' : IDL.Func(
         [CategoryName],
         [IDL.Vec(ViewCategory)],
         ['query'],
