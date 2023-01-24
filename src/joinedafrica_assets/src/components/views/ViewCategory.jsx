@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Box, Stack, Container, Typography, Button } from "@mui/material";
-import FilterByCategory from "./FilterByCategory";
-import { joinedafrica } from "../../../declarations/joinedafrica/index";
+import FilterByCategory from "../FilterByCategory";
+import { joinedafrica } from "../../../../declarations/joinedafrica/index";
 import { useParams } from "react-router-dom";
-import Header from "./Header";
+import Header from "../Header";
 
 export default function ViewCategory() {
   const { categoryName } = useParams();

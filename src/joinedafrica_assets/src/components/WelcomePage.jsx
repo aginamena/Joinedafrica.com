@@ -12,7 +12,7 @@ export default function WelcomePage() {
         <Typography variant="h6">Welcome to Joined Africa!</Typography>
         <Button variant="contained">
           <Link to="/home" style={{ textDecoration: "none", color: "initial" }}>
-            Log in
+            View site
           </Link>
         </Button>
       </Greeting>

@@ -6,13 +6,12 @@ import {
   Input,
   Stack,
   Badge,
-  Avatar,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import MailIcon from "@mui/icons-material/Mail";
-import { deepPurple } from "@mui/material/colors";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import MyProfileMenu from "./MyprofileMenu";
 
 export default function Header() {
   const InputContainer = styled("div")({
@@ -47,7 +46,7 @@ export default function Header() {
           <Badge>
             <NotificationsNoneIcon color="action" />
           </Badge>
-          <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+          <MyProfileMenu />
         </Stack>
       </Toolbar>
     </AppBar>
