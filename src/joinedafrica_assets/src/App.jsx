@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WelcomePage from "./components/WelcomePage";
 import ViewCategory from "./components/views/ViewCategory";
-import MyAccount from "./components/views/MyAccount";
+import MyAccount from "./components/MyAccount/MyAccount";
 
 export default function App() {
   const darkTheme = createTheme({
@@ -26,7 +26,11 @@ export default function App() {
             path="/home/view/:categoryName"
             element={<ViewCategory />}
           />
-          <Route exact path = "/home/myaccount/:tabName" element= {<MyAccount />}/>
+          <Route
+            exact
+            path="/home/myaccount/:tabName"
+            element={<MyAccount />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
