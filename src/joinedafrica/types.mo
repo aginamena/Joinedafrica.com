@@ -13,7 +13,7 @@ module {
     //the strucutre of how the posts are organised in the database
     public type Category = {
         name : Text;
-        subCategory : [Category];
+        subcategory : [Text];
     };
 
     //the structure of how the posts are viewed in the frontend

@@ -5,144 +5,72 @@ module {
     public let joined_africa_category : [Category] = [
         {
             name = "vehicles";
-            subCategory = [
-                {
-                    name = "cars";
-                    subCategory = [];
-                },
-                {
-                    name = "boats";
-                    subCategory = [];
-                },
-                {
-                    name = "trucks";
-                    subCategory = [];
-                },
-                {
-                    name = "trailers";
-                    subCategory = [];
-                },
-                {
-                    name = "motocycles";
-                    subCategory = [];
-                },
-            ];
+            subcategory = ["cars", "boats", "trucks", "trailers", "motocycles"];
         },
         {
             name = "electronics";
-            subCategory = [
-                {
-                    name = "computer-&-laptops";
-                    subCategory = [];
-                },
-                {
-                    name = "video-games";
-                    subCategory = [];
-                },
-                {
-                    name = "camera";
-                    subCategory = [];
-                },
-                {
-                    name = "radio-&-home-audio";
-                    subCategory = [];
-                },
-                {
-                    name = "other-electronic-gadgets";
-                    subCategory = [];
-                },
+            subcategory = [
+                "computer-&-laptops",
+
+                "video-games",
+
+                "camera",
+
+                "radio-&-home-audio",
+
+                "other-electronic-gadgets",
             ];
         },
         {
             name = "health-&-beauty";
-            subCategory = [
-                {
-                    name = "skin-care";
-                    subCategory = [];
-                },
-                {
-                    name = "hair-products";
-                    subCategory = [];
-                },
-                {
-                    name = "bath-&-body";
-                    subCategory = [];
-                },
-                {
-                    name = "fragrance";
-                    subCategory = [];
-                },
-                {
-                    name = "vitamins-&-supplements";
-                    subCategory = [];
-                },
+            subcategory = [
+                "skin-care",
+
+                "hair-products",
+
+                "bath-&-body",
+
+                "fragrance",
+
+                "vitamins-&-supplements",
             ];
         },
         {
             name = "mobile-phones-&-tablets";
-            subCategory = [
-                {
-                    name = "phones";
-                    subCategory = [];
-                },
-                {
-                    name = "tablets";
-                    subCategory = [];
-                },
-                {
-                    name = "wrist-watches";
-                    subCategory = [];
-                },
-                {
-                    name = "accessories-for-mobile-phones-&-tablets";
-                    subCategory = [];
-                },
+            subcategory = [
+                "phones",
+
+                "tablets",
+
+                "wrist-watches",
+
+                "accessories-for-mobile-phones-&-tablets",
             ];
         },
         {
             name = "property";
-            subCategory = [
-                {
-                    name = "houses-&-apartments-for-rent";
-                    subCategory = [];
-                },
-                {
-                    name = "houses-&-apartments-for-sale";
-                    subCategory = [];
-                },
-                {
-                    name = "land-&-plots-for-rent";
-                    subCategory = [];
-                },
-                {
-                    name = "commercial-property-for-sale";
-                    subCategory = [];
-                },
-                {
-                    name = "short-let-property";
-                    subCategory = [];
-                },
+            subcategory = [
+                "houses-&-apartments-for-rent",
+
+                "houses-&-apartments-for-sale",
+
+                "land-&-plots-for-rent",
+
+                "commercial-property-for-sale",
+
+                "short-let-property",
             ];
         },
         {
             name = "fashion";
-            subCategory = [
-                {
-                    name = "bags";
-                    subCategory = [];
-                },
-                {
-                    name = "clothing-&-clothing-accessories";
-                    subCategory = [];
-                },
-                {
-                    name = "jewelry";
-                    subCategory = [];
-                },
-                {
-                    name = "shoes";
-                    subCategory = [];
-                },
+            subcategory = [
+                "bags",
+
+                "clothing-&-clothing-accessories",
+
+                "jewelry",
+
+                "shoes",
             ];
         },
     ];

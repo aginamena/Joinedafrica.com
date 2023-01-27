@@ -19,24 +19,10 @@ export interface Post {
   'images' : Array<number>,
   'firstName' : string,
 }
-export interface Post__1 {
-  'creatorsId' : Principal,
-  'description' : string,
-  'creation_date_of_Post' : string,
-  'lastName' : string,
-  'images' : Array<number>,
-  'firstName' : string,
-}
 export type Trie = { 'branch' : Branch } |
   { 'leaf' : Leaf } |
   { 'empty' : null };
 export type Trie_1 = { 'branch' : Branch_1 } |
   { 'leaf' : Leaf_1 } |
   { 'empty' : null };
-export interface ViewCategory { 'name' : string, 'posts' : Array<Post__1> }
-export interface _SERVICE {
-  'get_all_subcategory_to_a_category' : (arg_0: CategoryName) => Promise<
-      Array<ViewCategory>
-    >,
-  'gets' : () => Promise<Trie>,
-}
+export interface _SERVICE { 'gets' : () => Promise<Trie> }

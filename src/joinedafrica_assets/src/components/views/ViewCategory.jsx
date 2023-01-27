@@ -9,7 +9,7 @@ export default function ViewCategory() {
   const { categoryName } = useParams();
   const [loading, setLoading] = useState(false);
 
-  const [subCategory, setSubCategory] = useState([]);
+  const [subcategory, setsubcategory] = useState([]);
   const [posts, setPosts] = useState(null);
   useEffect(() => {
     async function getPostings() {
@@ -17,12 +17,12 @@ export default function ViewCategory() {
       const postings = await joinedafrica.get_all_subcategory_to_a_category(
         categoryName
       );
-      const subCategoryNames = [];
+      const subcategoryNames = [];
       for (let i = 0; i < postings.length; i++) {
-        subCategoryNames.push(postings[i].name);
+        subcategoryNames.push(postings[i].name);
       }
-      console.log(subCategoryNames);
-      setSubCategory(subCategoryNames);
+      console.log(subcategoryNames);
+      setsubcategory(subcategoryNames);
       setLoading(false);
     }
     getPostings();
@@ -38,7 +38,7 @@ export default function ViewCategory() {
             ) : (
               <Box>
                 <Stack direction="row" spacing={3}>
-                  {subCategory.map((name, index) => (
+                  {subcategory.map((name, index) => (
                     <Button variant="contained" key={index}>
                       {name}
                     </Button>

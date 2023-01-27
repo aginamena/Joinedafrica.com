@@ -83,7 +83,7 @@ export default function MyAccount() {
         <TabPanel value={value} index={2}>
           Item Three
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={3} style = {{width:"100%"}}>
           <CreatePost />
         </TabPanel>
       </Container>

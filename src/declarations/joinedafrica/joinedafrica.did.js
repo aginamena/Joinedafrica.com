@@ -4,24 +4,12 @@ export const idlFactory = ({ IDL }) => {
   const List_2 = IDL.Rec();
   const Trie = IDL.Rec();
   const Trie_1 = IDL.Rec();
-  const CategoryName = IDL.Text;
-  const Post__1 = IDL.Record({
-    'creatorsId' : IDL.Principal,
-    'description' : IDL.Text,
-    'creation_date_of_Post' : IDL.Text,
-    'lastName' : IDL.Text,
-    'images' : IDL.Vec(IDL.Nat8),
-    'firstName' : IDL.Text,
-  });
-  const ViewCategory = IDL.Record({
-    'name' : IDL.Text,
-    'posts' : IDL.Vec(Post__1),
-  });
   const Branch = IDL.Record({
     'left' : Trie,
     'size' : IDL.Nat,
     'right' : Trie,
   });
+  const CategoryName = IDL.Text;
   const Hash = IDL.Nat32;
   const Key = IDL.Record({ 'key' : CategoryName, 'hash' : Hash });
   const Branch_1 = IDL.Record({
@@ -50,13 +38,6 @@ export const idlFactory = ({ IDL }) => {
   Trie.fill(
     IDL.Variant({ 'branch' : Branch, 'leaf' : Leaf, 'empty' : IDL.Null })
   );
-  return IDL.Service({
-    'get_all_subcategory_to_a_category' : IDL.Func(
-        [CategoryName],
-        [IDL.Vec(ViewCategory)],
-        ['query'],
-      ),
-    'gets' : IDL.Func([], [Trie], ['query']),
-  });
+  return IDL.Service({ 'gets' : IDL.Func([], [Trie], ['query']) });
 };
 export const init = ({ IDL }) => { return []; };

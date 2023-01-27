@@ -1,8 +1,3 @@
-type ViewCategory = 
- record {
-   name: text;
-   posts: vec Post__1;
- };
 type Trie_1 = 
  variant {
    branch: Branch_1;
@@ -14,15 +9,6 @@ type Trie =
    branch: Branch;
    "empty";
    leaf: Leaf;
- };
-type Post__1 = 
- record {
-   creation_date_of_Post: text;
-   creatorsId: principal;
-   description: text;
-   firstName: text;
-   images: vec nat8;
-   lastName: text;
  };
 type Post = 
  record {
@@ -100,7 +86,5 @@ type AssocList =
        List_2;
      };
 service : {
-  get_all_subcategory_to_a_category: (CategoryName) ->
-   (vec ViewCategory) query;
   gets: () -> (Trie) query;
 }
