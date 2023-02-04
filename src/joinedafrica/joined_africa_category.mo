@@ -42,8 +42,6 @@ module {
 
                 "tablets",
 
-                "wrist-watches",
-
                 "accessories-for-mobile-phones-&-tablets",
             ];
         },
@@ -54,11 +52,7 @@ module {
 
                 "houses-&-apartments-for-sale",
 
-                "land-&-plots-for-rent",
-
-                "commercial-property-for-sale",
-
-                "short-let-property",
+                "land-&-plots-for-sale",
             ];
         },
         {

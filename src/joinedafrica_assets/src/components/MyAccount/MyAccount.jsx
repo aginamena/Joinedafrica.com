@@ -40,7 +40,7 @@ export default function MyAccount() {
       <Container
         sx={{
           flexGrow: 1,
-          // bgcolor: "background.paper",
+          marginBottom: "100px",
           display: "flex",
           marginTop: "100px",
         }}

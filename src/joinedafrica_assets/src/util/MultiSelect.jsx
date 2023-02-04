@@ -18,7 +18,7 @@ export function MultiSelect({ name, listOfElements, clickedValue }) {
           label={name}
           // some MultiSelect select elements don't have the clickedValue function
           // so we have to have an optional check
-          onChange={(event) => clickedValue && clickedValue(event.target.value)}
+          onChange={(event) => clickedValue(event.target.value)}
         >
           {listOfElements.map((name, index) => (
             <MenuItem value={name} key={index}>

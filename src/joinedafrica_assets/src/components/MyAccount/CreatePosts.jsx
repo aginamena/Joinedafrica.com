@@ -12,12 +12,15 @@ import {
 import { MultiSelect } from "../../util/MultiSelect";
 import { getCategoryNames, getsubcategory } from "../../util/ListOfCategories";
 import { PostImage } from "../../styling/CreatePosts";
+import { CreatePostSpecification } from "../../util/CreatePostSpecification";
 
 export default function CreatePost() {
   const [categories, setCategories] = useState(getCategoryNames());
   const [subcategories, setSubcategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [previewImages, setPreviewImages] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubcategory, setSelectedSubcategory] = useState("");
 
   function addImages(event) {
     if (previewImages.length == 3) {
@@ -44,11 +47,19 @@ export default function CreatePost() {
               <MultiSelect
                 name="Product category"
                 listOfElements={categories}
-                clickedValue={(categoryName) =>
-                  setSubcategories(getsubcategory(categoryName))
+                clickedValue={(categoryName) => {
+                  setSubcategories(getsubcategory(categoryName));
+                  // console.log(typeof categoryName);
+                  setSelectedCategory(categoryName);
+                }}
+              />
+              <MultiSelect
+                name="sub-category"
+                listOfElements={subcategories}
+                clickedValue={(subcategoryName) =>
+                  setSelectedSubcategory(subcategoryName)
                 }
               />
-              <MultiSelect name="sub-category" listOfElements={subcategories} />
             </Stack>
           </Box>
           <Box style={{ marginBottom: "35px", marginTop: "35px" }}>
@@ -106,6 +117,14 @@ export default function CreatePost() {
                 rows={7}
                 placeholder="What other details do you want buyers to know about?"
               />
+              <MultiSelect
+                name="Condition"
+                listOfElements={["new", "used"]}
+                // clickedValue={(subcategoryName) =>
+                //   setSelectedSubcategory(subcategoryName)
+                // }
+              />
+              {CreatePostSpecification(selectedCategory, selectedSubcategory)}
             </Stack>
           </Box>
         </Box>

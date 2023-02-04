@@ -10,36 +10,42 @@ export const categories = [
   {
     name: "Vehicles",
     icon: <DirectionsCarIcon />,
-    subcategory: ["cars", "boats", "trucks", "trailers", "motocycles"],
+    subcategory: [
+      "cars",
+      "buses",
+      "trucks & trailers",
+      "vehicle parts & assessories",
+      "motocycles",
+    ],
   },
   {
     name: "Electronics",
     icon: <CableIcon />,
     subcategory: [
-      "computer-&-laptops",
+      "computers & laptops",
 
-      "video-games",
+      "electronic supplies",
+      "audio & music equipment",
 
-      "camera",
+      "computer accessories",
 
-      "radio-&-home-audio",
-
-      "other-electronic-gadgets",
+      "radio & home audio",
+      "tv & dvd equipment",
     ],
   },
   {
     name: "Health & Beauty",
     icon: <FavoriteBorderIcon />,
     subcategory: [
-      "skin-care",
+      "skincare",
 
-      "hair-products",
+      "hair products",
 
-      "bath-&-body",
+      "bath & body",
 
-      "fragrance",
+      "fragrances",
 
-      "vitamins-&-supplements",
+      "vitamins & supplements",
     ],
   },
   {
@@ -50,24 +56,18 @@ export const categories = [
 
       "tablets",
 
-      "wrist-watches",
-
-      "accessories-for-mobile-phones-&-tablets",
+      "accessories for mobile phones & tablets",
     ],
   },
   {
     name: "Property",
     icon: <HomeIcon />,
     subcategory: [
-      "houses-&-apartments-for-rent",
+      "houses & apartments for rent",
 
-      "houses-&-apartments-for-sale",
+      "houses & apartments for sale",
 
-      "land-&-plots-for-rent",
-
-      "commercial-property-for-sale",
-
-      "short-let-property",
+      "land & plots for sale",
     ],
   },
 
@@ -77,7 +77,7 @@ export const categories = [
     subcategory: [
       "bags",
 
-      "clothing-&-clothing-accessories",
+      "clothing & clothing-accessories",
 
       "jewelry",
 
