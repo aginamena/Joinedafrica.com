@@ -8,29 +8,84 @@ import {
   InputLabel,
   OutlinedInput,
   InputAdornment,
+  Button,
 } from "@mui/material";
 import { MultiSelect } from "../../util/MultiSelect";
 import { getCategoryNames, getsubcategory } from "../../util/ListOfCategories";
 import { PostImage } from "../../styling/CreatePosts";
 import { CreatePostSpecification } from "../../util/CreatePostSpecification";
+import SendIcon from "@mui/icons-material/Send";
 
 export default function CreatePost() {
   const [categories, setCategories] = useState(getCategoryNames());
   const [subcategories, setSubcategories] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [previewImages, setPreviewImages] = useState([]);
+  // const [previewImages, setPreviewImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubcategory, setSelectedSubcategory] = useState("");
+  const [productTitle, setProductTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [productDescription, setProductDescription] = useState("");
+  const [condition, setCondition] = useState("");
+  const [yearOfManufacture, setYearOfManufacture] = useState("2022");
+  const [nameOfManufacturer, setNameOfManufacturer] = useState("");
+  const [model, setModel] = useState("");
+  const [gender, setGender] = useState("");
+  const [isFurnished, setIsFurnished] = useState("");
+  const [hasParketingSpace, setHasParkingSpace] = useState("");
+  const [durationOfRenting, setDurationOfRenting] = useState("");
+  const [numberOfPlots, setNumberOfPlots] = useState("");
 
   function addImages(event) {
-    if (previewImages.length == 3) {
+    if (selectedImages.length == 3) {
       alert("The maximum number of images to add is 3");
       return;
     }
-    setPreviewImages([
-      ...previewImages,
-      URL.createObjectURL(event.target.files[0]),
-    ]);
+    setSelectedImages([...selectedImages, event.target.files[0]]);
+    // setPreviewImages([
+    //   ...previewImages,
+    //   URL.createObjectURL(event.target.files[0]),
+    // ]);
+  }
+
+  function createPost(event) {
+    event.preventDefault();
+    const post = {
+      category: selectedCategory,
+      subcategory: selectedSubcategory,
+      productTitle,
+      amount,
+      productDescription,
+      condition,
+    };
+    if (
+      selectedCategory === "Vehicles" ||
+      selectedCategory === "Electronics" ||
+      selectedCategory === "Mobile phones & Tablets"
+    ) {
+      post.yearOfManufacture = yearOfManufacture;
+      post.model = model;
+      post.nameOfManufacturer = nameOfManufacturer;
+    } else if (selectedCategory === "Health & Beauty") {
+      post.gender = gender;
+    } else if (selectedCategory === "Property") {
+      post.isFurnished = isFurnished;
+      post.hasParketingSpace = hasParketingSpace;
+      if (selectedSubcategory === "houses & apartments for rent") {
+        post.durationOfRenting = durationOfRenting;
+      }
+    } else {
+      post.numberOfPlots = numberOfPlots;
+    }
+    const imageBlobs = [];
+    selectedImages.forEach((image) => {
+      imageBlobs.push(new Blob([new Uint8Array(image)], { type: file.type }));
+    });
+    post.images = imageBlobs;
+    console.log(post);
+
+    // console.log(event);
   }
 
   return (
@@ -38,7 +93,7 @@ export default function CreatePost() {
       {loading ? (
         <Typography>Loading...</Typography>
       ) : (
-        <Box component="form">
+        <Box component="form" autoComplete="off" onSubmit={createPost}>
           <Box>
             <Typography style={{ marginBottom: "10px" }}>
               Product category
@@ -68,7 +123,12 @@ export default function CreatePost() {
             </Typography>
             <PostImage>
               <Box>
-                <input type="file" accept="image/*" onChange={addImages} />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={addImages}
+                  required
+                />
 
                 <Typography>
                   Add some images. You can add up to 3 images
@@ -77,11 +137,10 @@ export default function CreatePost() {
             </PostImage>
             <Divider />
             <Stack direction="row" spacing={2} style={{ marginTop: "20px" }}>
-              {previewImages.map((imageUrl, index) => (
-                <Box style={{ width: "200px", height: "200px" }}>
+              {selectedImages.map((file, index) => (
+                <Box key={index} style={{ width: "200px", height: "200px" }}>
                   <img
-                    key={index}
-                    src={imageUrl}
+                    src={URL.createObjectURL(file)}
                     alt="Posting preview"
                     style={{
                       width: "100%",
@@ -90,6 +149,18 @@ export default function CreatePost() {
                   />
                 </Box>
               ))}
+              {/* {previewImages.map((imageUrl, index) => (
+                <Box key={index} style={{ width: "200px", height: "200px" }}>
+                  <img
+                    src={imageUrl}
+                    alt="Posting preview"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </Box>
+              ))} */}
             </Stack>
           </Box>
           <Box>
@@ -97,7 +168,12 @@ export default function CreatePost() {
               Product details
             </Typography>
             <Stack spacing={2}>
-              <TextField label="Product title" variant="outlined" />
+              <TextField
+                required
+                label="Product title"
+                variant="outlined"
+                onChange={(e) => setProductTitle(e.target.value)}
+              />
               <Box>
                 <InputLabel htmlFor="outlined-adornment-amount">
                   Amount
@@ -105,28 +181,42 @@ export default function CreatePost() {
                 <OutlinedInput
                   style={{ width: "100%" }}
                   id="outlined-adornment-amount"
+                  required
                   startAdornment={
                     <InputAdornment position="start">BTC</InputAdornment>
                   }
+                  onChange={(e) => setAmount(e.target.value)}
                 />
               </Box>
               <TextField
+                required
                 label="Product description"
                 variant="outlined"
                 multiline
                 rows={7}
                 placeholder="What other details do you want buyers to know about?"
+                onChange={(e) => setProductDescription(e.target.value)}
               />
               <MultiSelect
                 name="Condition"
                 listOfElements={["new", "used"]}
-                // clickedValue={(subcategoryName) =>
-                //   setSelectedSubcategory(subcategoryName)
-                // }
+                clickedValue={(condition) => setCondition(condition)}
               />
-              {CreatePostSpecification(selectedCategory, selectedSubcategory)}
+              {CreatePostSpecification(selectedCategory, selectedSubcategory, {
+                setYearOfManufacture,
+                setNameOfManufacturer,
+                setModel,
+                setGender,
+                setIsFurnished,
+                setHasParkingSpace,
+                setDurationOfRenting,
+                setNumberOfPlots,
+              })}
             </Stack>
           </Box>
+          <Button variant="contained" endIcon={<SendIcon />} type="submit">
+            Create post
+          </Button>
         </Box>
       )}
     </Box>

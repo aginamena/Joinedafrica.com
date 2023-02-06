@@ -16,8 +16,7 @@ export function MultiSelect({ name, listOfElements, clickedValue }) {
           id="select-label"
           defaultValue=""
           label={name}
-          // some MultiSelect select elements don't have the clickedValue function
-          // so we have to have an optional check
+          required
           onChange={(event) => clickedValue(event.target.value)}
         >
           {listOfElements.map((name, index) => (

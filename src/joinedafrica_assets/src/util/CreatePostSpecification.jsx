@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import { Box, TextField } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TextField } from "@mui/material";
 import { MultiSelect } from "./MultiSelect";
 
-export function CreatePostSpecification(categoryName, subCategoryName) {
-  const [year, setYear] = React.useState("2023");
+export function CreatePostSpecification(
+  categoryName,
+  subCategoryName,
+  {
+    setYearOfManufacture,
+    setNameOfManufacturer,
+    setModel,
+    setGender,
+    setIsFurnished,
+    setHasParkingSpace,
+    setDurationOfRenting,
+    setNumberOfPlots,
+  }
+) {
   if (
     categoryName === "Vehicles" ||
     categoryName === "Electronics" ||
@@ -14,21 +23,26 @@ export function CreatePostSpecification(categoryName, subCategoryName) {
   ) {
     return (
       <>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            views={["year"]}
-            label="Year of manufacture"
-            value={year}
-            onChange={(input) => {
-              setYear(input.$y);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} helperText={null} />
-            )}
-          />
-        </LocalizationProvider>
-        <TextField label="Name of manufacturer" variant="outlined" />
-        <TextField label="Model" variant="outlined" />
+        <TextField
+          required
+          type="number"
+          label="Year of manufacture"
+          variant="outlined"
+          inputProps={{ min: 1900, max: 2099 }}
+          onChange={(e) => setYearOfManufacture(e.target.value)}
+        />
+        <TextField
+          required
+          label="Name of manufacturer"
+          variant="outlined"
+          onChange={(e) => setNameOfManufacturer(e.target.value)}
+        />
+        <TextField
+          required
+          label="Model"
+          variant="outlined"
+          onChange={(e) => setModel(e.target.value)}
+        />
       </>
     );
   }
@@ -37,38 +51,50 @@ export function CreatePostSpecification(categoryName, subCategoryName) {
       <MultiSelect
         name="Gender"
         listOfElements={["male", "female", "unisex"]}
+        clickedValue={(gender) => setGender(gender)}
       />
     );
   }
   if (categoryName === "Property") {
-    if (subCategoryName === "houses & apartments for sale") {
+    if (
+      subCategoryName === "houses & apartments for sale" ||
+      subCategoryName === "houses & apartments for rent"
+    ) {
       return (
         <>
-          <MultiSelect name="Furnished" listOfElements={["yes", "no"]} />
-          <MultiSelect name="Parking space" listOfElements={["yes", "no"]} />
-        </>
-      );
-    }
-    if (subCategoryName === "houses & apartments for rent") {
-      return (
-        <>
-          <MultiSelect name="Furnished" listOfElements={["yes", "no"]} />
-          <MultiSelect name="Parking space" listOfElements={["yes", "no"]} />
-          <TextField
-            id="outlined-number"
-            label="Duration of rent in months"
-            type="number"
-            inputProps={{ min: 1 }}
+          <MultiSelect
+            name="Furnished"
+            listOfElements={["yes", "no"]}
+            clickedValue={(isFurnished) => setIsFurnished(isFurnished)}
           />
+          <MultiSelect
+            name="Parking space"
+            listOfElements={["yes", "no"]}
+            clickedValue={(hasParketingSpace) =>
+              setHasParkingSpace(hasParketingSpace)
+            }
+          />
+          {subCategoryName === "houses & apartments for rent" && (
+            <TextField
+              required
+              id="outlined-number"
+              label="Duration of rent in months"
+              type="number"
+              inputProps={{ min: 1 }}
+              onChange={(e) => setDurationOfRenting(e.target.value)}
+            />
+          )}
         </>
       );
     }
     if (subCategoryName === "land & plots for sale") {
       return (
         <TextField
+          required
           id="outlined-number"
           label="Number of plots"
           type="number"
+          onChange={(e) => setNumberOfPlots(e.target.value)}
           inputProps={{ min: 1 }}
         />
       );
