@@ -1,24 +1,24 @@
 import Trie "mo:base/Trie";
 import Type "types";
-import Util "util";
-import PostCategory "joined_africa_category";
+import Posts "Posts";
+import DatabaseStructure "DatabaseStructure";
 import List "mo:base/List";
 import Debug "mo:base/Debug";
 
 actor Backend {
 
-  type CategoryName = Text;
+  type Category = Text;
   type Post = Type.Post;
-  type ViewCategory = Type.ViewCategory;
-  type Category = Type.Category;
+  // type ViewCategory = Type.ViewCategory;
+  // type Category = Type.Category;
 
   //categories stores all the posts categories
-  var categories : Util.PostingCategory = Util.PostingCategory();
-  categories.create_category(PostCategory.joined_africa_category);
+  var PublishedPosts : Posts.PublishedPosts = Posts.PublishedPosts();
+  PublishedPosts.createDatabase(DatabaseStructure.Database);
 
-  public query func gets() : async Trie.Trie<CategoryName, Trie.Trie<CategoryName, List.List<Post>>> {
-    return categories.get();
-  };
+  // public query func gets() : async Trie.Trie<CategoryName, Trie.Trie<CategoryName, List.List<Post>>> {
+  //   return categories.get();
+  // };
   // public query func get_all_subcategory_in_a_category(categoryName : CategoryName) : async [ViewCategory] {
   //   Debug.print(debug_show (categoryName));
   //   return categories.get_all_subcategory_in_a_category(categoryName);

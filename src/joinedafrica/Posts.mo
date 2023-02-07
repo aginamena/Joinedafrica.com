@@ -5,26 +5,27 @@ import Option "mo:base/Option";
 import List "mo:base/List";
 
 module {
-    type CategoryName = Text;
+    type Category = Text;
+    type Subcategory = Text;
     type Post = Type.Post;
-    type Category = Type.Category;
-    type ViewCategory = Type.ViewCategory;
+    type Database = Type.Database;
+    // type ViewCategory = Type.ViewCategory;
 
-    public class PostingCategory() {
-        var joined_africa_category : Trie.Trie<CategoryName, Trie.Trie<CategoryName, List.List<Post>>> = Trie.empty();
+    public class PublishedPosts() {
+        var allPublishedPosts : Trie.Trie<Category, Trie.Trie<Subcategory, List.List<Post>>> = Trie.empty();
 
-        //initialise the database with the category and subcategory names
-        public func create_category(allCategories : [Category]) {
+        //initialie the database with the category and subcategory names
+        public func createDatabase(allCategories : [Database]) {
             for (category in allCategories.vals()) {
-                var newCategory : Trie.Trie<CategoryName, List.List<Post>> = Trie.empty();
+                var allSubCategories : Trie.Trie<Subcategory, List.List<Post>> = Trie.empty();
                 for (subcategory in category.subcategory.vals()) {
-                    newCategory := Trie.put(newCategory, key(subcategory), Text.equal, List.nil()).0;
+                    allSubCategories := Trie.put(allSubCategories, key(subcategory), Text.equal, List.nil()).0;
                 };
-                joined_africa_category := Trie.put(joined_africa_category, key(category.name), Text.equal, newCategory).0;
+                allPublishedPosts := Trie.put(allPublishedPosts, key(category.name), Text.equal, allSubCategories).0;
             };
         };
-        public func get() : Trie.Trie<CategoryName, Trie.Trie<CategoryName, List.List<Post>>> {
-            return joined_africa_category;
+        public func get() : Trie.Trie<Category, Trie.Trie<Subcategory, List.List<Post>>> {
+            return allPublishedPosts;
         };
 
         // given the category name, we return all the posts in that category alongside with their names
@@ -44,7 +45,7 @@ module {
 
     };
 
-    func key(t : CategoryName) : Trie.Key<CategoryName> {
-        { key = t; hash = Text.hash t };
+    func key(t : Category) : Trie.Key<Category> {
+        { key = t; hash = Text.hash(t) };
     };
 };

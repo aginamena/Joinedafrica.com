@@ -1,8 +1,8 @@
 import Cat "types";
 module {
-    type Category = Cat.Category;
+    type Database = Cat.Database;
 
-    public let joined_africa_category : [Category] = [
+    public let Database : [Database] = [
         {
             name = "vehicles";
             subcategory = ["cars", "boats", "trucks", "trailers", "motocycles"];
