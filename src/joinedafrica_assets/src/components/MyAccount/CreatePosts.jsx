@@ -49,7 +49,7 @@ export default function CreatePost() {
     // ]);
   }
 
-  function createPost(event) {
+  async function createPost(event) {
     event.preventDefault();
     const post = {
       category: selectedCategory,
@@ -79,11 +79,15 @@ export default function CreatePost() {
       post.numberOfPlots = numberOfPlots;
     }
     const imageBlobs = [];
-    selectedImages.forEach((image) => {
-      imageBlobs.push(new Blob([new Uint8Array(image)], { type: file.type }));
-    });
+    await Promise.all(
+      selectedImages.map(async (image) => {
+        const imageToBinary = await image.arrayBuffer();
+        imageBlobs.push(new Uint8Array(imageToBinary));
+      })
+    );
+    console.log(imageBlobs);
     post.images = imageBlobs;
-    console.log(post);
+    // console.log(post);
 
     // console.log(event);
   }

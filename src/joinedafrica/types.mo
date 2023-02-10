@@ -3,9 +3,19 @@ import Text "mo:base/Text";
 module {
     public type Post = {
         creatorsId : Principal;
+        postId : Principal;
         creationDateOfPost : Text;
-        description : Text;
-        images : [Nat8];
+        images : [[Nat8]];
+        category : Text;
+        subcategory : Text;
+        productTitle : Text;
+        amount : Text;
+        productDescription : Text;
+        condition : Text;
+        productSpecification : {
+            // specific information about what type of category we are creating goes here
+
+        };
     };
 
     public type Profile = {
