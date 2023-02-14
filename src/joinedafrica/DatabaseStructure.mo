@@ -4,63 +4,69 @@ module {
 
     public let Database : [Database] = [
         {
-            name = "vehicles";
-            subcategory = ["cars", "boats", "trucks", "trailers", "motocycles"];
-        },
-        {
-            name = "electronics";
+            name = "Vehicles";
             subcategory = [
-                "computer-&-laptops",
-
-                "video-games",
-
-                "camera",
-
-                "radio-&-home-audio",
-
-                "other-electronic-gadgets",
+                "cars",
+                "buses",
+                "trucks & trailers",
+                "vehicle parts & assessories",
+                "motocycles",
             ];
         },
         {
-            name = "health-&-beauty";
+            name = "Electronics";
             subcategory = [
-                "skin-care",
+                "computers & laptops",
 
-                "hair-products",
+                "electronic supplies",
+                "audio & music equipment",
 
-                "bath-&-body",
+                "computer accessories",
 
-                "fragrance",
-
-                "vitamins-&-supplements",
+                "radio & home audio",
+                "tv & dvd equipment",
             ];
         },
         {
-            name = "mobile-phones-&-tablets";
+            name = "Health & Beauty";
+            subcategory = [
+                "skincare",
+
+                "hair products",
+
+                "bath & body",
+
+                "fragrances",
+
+                "vitamins & supplements",
+            ];
+        },
+        {
+            name = "Mobile phones & Tablets";
             subcategory = [
                 "phones",
 
                 "tablets",
 
-                "accessories-for-mobile-phones-&-tablets",
+                "accessories for mobile phones & tablets",
             ];
         },
         {
-            name = "property";
+            name = "Property";
             subcategory = [
-                "houses-&-apartments-for-rent",
+                "houses & apartments for rent",
 
-                "houses-&-apartments-for-sale",
+                "houses & apartments for sale",
 
-                "land-&-plots-for-sale",
+                "land & plots for sale",
             ];
         },
         {
-            name = "fashion";
+            name = "Fashion";
             subcategory = [
                 "bags",
 
-                "clothing-&-clothing-accessories",
+                "clothing & clothing-accessories",
 
                 "jewelry",
 

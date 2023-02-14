@@ -4,26 +4,25 @@ import Posts "Posts";
 import DatabaseStructure "DatabaseStructure";
 import List "mo:base/List";
 import Debug "mo:base/Debug";
+import MyPostings "MyPostings";
 
 actor Backend {
 
   type Category = Text;
   type Post = Type.Post;
-  // type ViewCategory = Type.ViewCategory;
-  // type Category = Type.Category;
 
-  //categories stores all the posts categories
-  var PublishedPosts : Posts.PublishedPosts = Posts.PublishedPosts();
-  PublishedPosts.createDatabase(DatabaseStructure.Database);
+  //publishedPosts contains all published posts (visible to other users)
+  var publishedPosts : Posts.PublishedPosts = Posts.PublishedPosts();
+  publishedPosts.createDatabase(DatabaseStructure.Database);
 
-  // public query func gets() : async Trie.Trie<CategoryName, Trie.Trie<CategoryName, List.List<Post>>> {
-  //   return categories.get();
-  // };
-  // public query func get_all_subcategory_in_a_category(categoryName : CategoryName) : async [ViewCategory] {
-  //   Debug.print(debug_show (categoryName));
-  //   return categories.get_all_subcategory_in_a_category(categoryName);
-  // };
-  // public query func get_all_categories() : async [Category] {
-  //   return PostCategory.joined_africa_category;
-  // };
+  //myPostings contains all my private postings not yet published
+  var myPostings : MyPostings.MyPostings = MyPostings.MyPostings();
+
+  public shared ({ caller }) func createPost(post : Post) : async () {
+    // Debug.print(debug_show (post))
+    myPostings.createPost(post, caller);
+  };
+  public shared ({ caller }) func getAllMyPostings() : async [Post] {
+    return myPostings.getAllMyPostings(caller);
+  };
 };

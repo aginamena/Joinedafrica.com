@@ -2,8 +2,6 @@ import Principal "mo:base/Principal";
 import Text "mo:base/Text";
 module {
     public type Post = {
-        creatorsId : Principal;
-        postId : Principal;
         creationDateOfPost : Text;
         images : [[Nat8]];
         category : Text;
@@ -13,8 +11,20 @@ module {
         productDescription : Text;
         condition : Text;
         productSpecification : {
-            // specific information about what type of category we are creating goes here
+            //Remove the optional values that are null. From being saved in the database
 
+            // specification for vehicles, electronics, mobile phones and tablets
+            yearOfManufacture : Int;
+            model : Text;
+            nameOfManufacturer : Text;
+            // specification for health and beauty
+            gender : Text;
+            // specification for houses and apartments for rent
+            isFurnished : Bool;
+            hasParkingSpace : Bool;
+            durationOfRenting : Int;
+            //land & plots for sale
+            numberOfPlots : Int;
         };
     };
 

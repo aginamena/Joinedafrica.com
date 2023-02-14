@@ -8,14 +8,14 @@ type Post =
    productDescription: text;
    productSpecification:
     record {
-      durationOfRenting: int;
-      gender: text;
-      hasParkingSpace: bool;
-      isFurnished: bool;
-      model: text;
-      nameOfManufacturer: text;
-      numberOfPlots: int;
-      yearOfManufacture: int;
+      durationOfRenting: opt int;
+      gender: opt text;
+      hasParkingSpace: opt int;
+      isFurnished: opt bool;
+      model: opt text;
+      nameOfManufacturer: opt text;
+      numberOfPlots: opt int;
+      yearOfManufacture: opt int;
     };
    productTitle: text;
    subcategory: text;
