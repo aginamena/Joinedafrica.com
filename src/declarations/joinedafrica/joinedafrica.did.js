@@ -19,9 +19,11 @@ export const idlFactory = ({ IDL }) => {
     'condition' : IDL.Text,
     'images' : IDL.Vec(IDL.Vec(IDL.Nat8)),
   });
+  const UserId = IDL.Principal;
   return IDL.Service({
     'createPost' : IDL.Func([Post], [], []),
     'getAllMyPostings' : IDL.Func([], [IDL.Vec(Post)], []),
+    'whoAmI' : IDL.Func([], [UserId], []),
   });
 };
 export const init = ({ IDL }) => { return []; };

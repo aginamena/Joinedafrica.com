@@ -19,7 +19,9 @@ export interface Post {
   'condition' : string,
   'images' : Array<Array<number>>,
 }
+export type UserId = Principal;
 export interface _SERVICE {
   'createPost' : (arg_0: Post) => Promise<undefined>,
   'getAllMyPostings' : () => Promise<Array<Post>>,
+  'whoAmI' : () => Promise<UserId>,
 }

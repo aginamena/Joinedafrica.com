@@ -93,7 +93,6 @@ export default function CreatePost() {
     );
 
     post.images = imageBlobs;
-    console.log(post);
     await joinedafrica.createPost(post);
     setLoading(false);
     setOpenSnackBar(true);

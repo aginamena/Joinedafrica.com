@@ -1,3 +1,4 @@
+type UserId = principal;
 type Post = 
  record {
    amount: text;
@@ -23,4 +24,5 @@ type Post =
 service : {
   createPost: (Post) -> ();
   getAllMyPostings: () -> (vec Post);
+  whoAmI: () -> (UserId);
 }

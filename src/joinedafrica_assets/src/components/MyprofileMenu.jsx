@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Box, Menu, MenuItem, Avatar } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { deepPurple } from "@mui/material/colors";
 import { LoginUser } from "../util/auth";
 import { Link } from "react-router-dom";
+import AppContext from "../context/AppContext";
 
 export default function MyProfileMenu() {
+  const { setUserId } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -35,7 +37,7 @@ export default function MyProfileMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={LoginUser}>Login</MenuItem>
+        <MenuItem onClick={() => LoginUser(setUserId)}>Login</MenuItem>
         <MenuItem onClick={handleClose}>My postings</MenuItem>
         <MenuItem onClick={handleClose}>My messages</MenuItem>
         <MenuItem onClick={handleClose}>Settings</MenuItem>

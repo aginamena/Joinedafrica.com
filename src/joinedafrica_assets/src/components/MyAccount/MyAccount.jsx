@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Header from "../Header";
 import CreatePost from "./CreatePosts";
+import MyPostings from "./MyPostings";
 
 export default function MyAccount() {
   function TabPanel(props) {
@@ -54,33 +55,33 @@ export default function MyAccount() {
           sx={{ borderRight: 1, borderColor: "divider" }}
         >
           <Tab
-            sx={{ alignItems: "start" }}
+            sx={{ alignItems: "start", textAlign: "left" }}
             label="My messages"
             {...a11yProps(0)}
           />
           <Tab
-            sx={{ alignItems: "start" }}
+            sx={{ alignItems: "start", textAlign: "left" }}
             label="My postings"
             {...a11yProps(1)}
           />
           <Tab
-            sx={{ alignItems: "start" }}
+            sx={{ alignItems: "start", textAlign: "left" }}
             label="Settings"
             {...a11yProps(2)}
           />
           <Tab
-            sx={{ alignItems: "start" }}
+            sx={{ alignItems: "start", textAlign: "left" }}
             label="Create posts"
             {...a11yProps(3)}
           />
         </Tabs>
-        <TabPanel value={value} index={0}>
+        <TabPanel value={value} index={0} style={{ width: "100%" }}>
           Item One
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          Item Two
+        <TabPanel value={value} index={1} style={{ width: "100%" }}>
+          <MyPostings />
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={2} style={{ width: "100%" }}>
           Item Three
         </TabPanel>
         <TabPanel value={value} index={3} style={{ width: "100%" }}>

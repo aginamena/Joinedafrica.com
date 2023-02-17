@@ -10,6 +10,7 @@ actor Backend {
 
   type Category = Text;
   type Post = Type.Post;
+  type UserId = Type.UserId;
 
   //publishedPosts contains all published posts (visible to other users)
   var publishedPosts : Posts.PublishedPosts = Posts.PublishedPosts();
@@ -25,4 +26,8 @@ actor Backend {
   public shared ({ caller }) func getAllMyPostings() : async [Post] {
     return myPostings.getAllMyPostings(caller);
   };
+  //get the principal id of the caller
+  public shared ({caller}) func whoAmI(): async UserId{
+    return caller;
+  }
 };
