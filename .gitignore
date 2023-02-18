@@ -13,3 +13,7 @@
 # frontend code
 node_modules/
 dist/
+
+# internet identity wasm files
+internet_identity.wasm
+internet_identity.did

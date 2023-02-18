@@ -18,7 +18,10 @@ export async function LoginUser(setAuthenticatedUser) {
     setAuthenticatedUser(authenticatedUser);
   } else {
     await authClient.login({
-      identityProvider: "https://identity.ic0.app/#authorize",
+      identityProvider:
+        process.env.NODE_ENV === "production"
+          ? "https://identity.ic0.app/#authorize"
+          : "http://127.0.0.1:8000/?canisterId=rwlgt-iiaaa-aaaaa-aaaaa-cai",
       onSuccess: async () => {
         const identity = await authClient.getIdentity();
         const authenticatedUser = createActor(canisterId, {
@@ -26,7 +29,6 @@ export async function LoginUser(setAuthenticatedUser) {
             identity,
           },
         });
-        // const userId = authClient._identity._principal.toText();
         setAuthenticatedUser(authenticatedUser);
       },
     });

@@ -20,9 +20,9 @@ actor Backend {
   var myPostings : MyPostings.MyPostings = MyPostings.MyPostings();
 
   public shared ({ caller }) func createPost(post : Post) : async () {
-    // Debug.print(debug_show (post))
-    Debug.print(debug_show (caller));
-    // myPostings.createPost(post, caller);
+    Debug.print(debug_show (post));
+    // Debug.print(debug_show (caller));
+    myPostings.createPost(post, caller);
   };
   public shared ({ caller }) func getAllMyPostings() : async [Post] {
     return myPostings.getAllMyPostings(caller);
