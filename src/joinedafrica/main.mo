@@ -21,13 +21,14 @@ actor Backend {
 
   public shared ({ caller }) func createPost(post : Post) : async () {
     // Debug.print(debug_show (post))
-    myPostings.createPost(post, caller);
+    Debug.print(debug_show (caller));
+    // myPostings.createPost(post, caller);
   };
   public shared ({ caller }) func getAllMyPostings() : async [Post] {
     return myPostings.getAllMyPostings(caller);
   };
   //get the principal id of the caller
-  public shared ({caller}) func whoAmI(): async UserId{
+  public shared ({ caller }) func whoAmI() : async UserId {
     return caller;
-  }
+  };
 };

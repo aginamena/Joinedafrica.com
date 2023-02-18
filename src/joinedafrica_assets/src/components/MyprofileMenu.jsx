@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import AppContext from "../context/AppContext";
 
 export default function MyProfileMenu() {
-  const { setUserId } = useContext(AppContext);
+  const { setAuthenticatedUser } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -37,14 +37,21 @@ export default function MyProfileMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={() => LoginUser(setUserId)}>Login</MenuItem>
+        <MenuItem onClick={() => LoginUser(setAuthenticatedUser)}>
+          Log in
+        </MenuItem>
         <MenuItem onClick={handleClose}>My postings</MenuItem>
         <MenuItem onClick={handleClose}>My messages</MenuItem>
         <MenuItem onClick={handleClose}>Settings</MenuItem>
         <MenuItem>
-          <Link to="/home/myaccount/create-posts">Create posts</Link>
+          <Link
+            to="/home/myaccount/create-posts"
+            style={{ color: "white", textDecoration: "none" }}
+          >
+            Create posts
+          </Link>
         </MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>Log out</MenuItem>
       </Menu>
     </Box>
   );

@@ -1,41 +1,33 @@
 import React from "react";
 import { AuthClient } from "@dfinity/auth-client";
+import {
+  canisterId,
+  createActor,
+} from "../../../declarations/joinedafrica/index";
 
-//log the user in through the internet identity and save the principal's id in global state
-
-export async function LoginUser(setUserId) {
+//log the user in through the internet identity and saves the authenticated actor, which is the user
+export async function LoginUser(setAuthenticatedUser) {
   const authClient = await AuthClient.create();
-  // const isAuthenticated = await authClient.isAuthenticated();
-  // console.log(isAuthenticated);
-  // console.log(setUserId);
-  // console.log(aut)
-  // if (!isAuthenticated) {
-  //   await authClient.login({
-  //     identityProvider: "https://identity.ic0.app/#authorize",
-  //     onSuccess: () => {
-  //       console.log("1");
-  //       const p = authClient._identity._principal.toText();
-  //       console.log("11");
-  //       console.log(authClient);
-  //       console.log("122");
-  //       // setUserId();
-  //     },
-  //   });
-  // }
-
   if (await authClient.isAuthenticated()) {
-    const p = authClient._identity._principal.toText();
-    const p1 = authClient;
-    console.log(p1);
+    const identity = await authClient.getIdentity();
+    const authenticatedUser = createActor(canisterId, {
+      agentOptions: {
+        identity,
+      },
+    });
+    setAuthenticatedUser(authenticatedUser);
   } else {
     await authClient.login({
       identityProvider: "https://identity.ic0.app/#authorize",
-      onSuccess: () => {
-        const p = authClient._identity._principal.toText();
-        const p1 = authClient;
-        console.log(p1);
-        //after the user has logged in, through internet identity, we render the App component
-        // ReactDOM.render(<App />, document.getElementById("root"));
+      onSuccess: async () => {
+        const identity = await authClient.getIdentity();
+        const authenticatedUser = createActor(canisterId, {
+          agentOptions: {
+            identity,
+          },
+        });
+        // const userId = authClient._identity._principal.toText();
+        setAuthenticatedUser(authenticatedUser);
       },
     });
   }

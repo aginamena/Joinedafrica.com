@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Typography,
@@ -18,10 +18,11 @@ import { getCategoryNames, getsubcategory } from "../../util/ListOfCategories";
 import { PostImage } from "../../styling/CreatePosts";
 import { CreatePostSpecification } from "../../util/CreatePostSpecification";
 import SendIcon from "@mui/icons-material/Send";
-import { joinedafrica } from "../../../../declarations/joinedafrica/index";
+import AppContext from "../../context/AppContext";
 
 export default function CreatePost() {
   const [categories, setCategories] = useState(getCategoryNames());
+  const { authenticatedUser } = useContext(AppContext);
   const [subcategories, setSubcategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -61,8 +62,13 @@ export default function CreatePost() {
     setSelectedImages([...selectedImages, event.target.files[0]]);
   }
 
+  // sends the created post to the backend but the user has to be authenticated first using the internet identity
   async function createPost(event) {
     event.preventDefault();
+    if (authenticatedUser == null) {
+      alert("You have to log in first before you can create a post");
+      return;
+    }
     setLoading(true);
     const post = {
       creationDateOfPost: new Date().toLocaleDateString(),
@@ -93,7 +99,7 @@ export default function CreatePost() {
     );
 
     post.images = imageBlobs;
-    await joinedafrica.createPost(post);
+    await authenticatedUser.createPost(post);
     setLoading(false);
     setOpenSnackBar(true);
   }

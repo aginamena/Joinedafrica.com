@@ -9,15 +9,15 @@ import MyAccount from "./components/MyAccount/MyAccount";
 import AppContext from "./context/AppContext";
 
 export default function App() {
-  const [userId, setUserId] = useState("");
+  const [authenticatedUser, setAuthenticatedUser] = useState(null);
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
     },
   });
   const stateValues = {
-    userId,
-    setUserId,
+    authenticatedUser,
+    setAuthenticatedUser,
   };
   return (
     <AppContext.Provider value={stateValues}>
