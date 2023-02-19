@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WelcomePage from "./components/WelcomePage";
 import ViewCategory from "./components/views/ViewCategory";
 import MyAccount from "./components/MyAccount/MyAccount";
-import AppContext from "./context/AppContext";
+import { AppContext } from "./context";
 
 export default function App() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);

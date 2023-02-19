@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField } from "@mui/material";
-import { MultiSelect } from "./MultiSelect";
+import { MultiSelect } from "./reuseableComponents/MultiSelect";
 
 export function CreatePostSpecification(
   categoryName,

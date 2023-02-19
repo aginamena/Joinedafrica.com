@@ -29,8 +29,6 @@ module {
                 case null [];
                 case (?myPosts) List.toArray(myPosts);
             };
-            // var myPosts : ?List.List<Post> = Trie.get(myPostings, Utils.key(userId), Utils.equal)
-            // [];
         };
         private func userHasCreatedAnAccount(userId : UserId) : Bool {
             //to be implemented

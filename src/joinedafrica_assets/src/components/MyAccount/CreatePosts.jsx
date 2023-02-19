@@ -12,19 +12,20 @@ import {
   CircularProgress,
   Snackbar,
 } from "@mui/material";
-import { MultiSelect } from "../../util/MultiSelect";
 import MuiAlert from "@mui/material/Alert";
 import { getCategoryNames, getsubcategory } from "../../util/ListOfCategories";
 import { PostImage } from "../../styling/CreatePosts";
 import { CreatePostSpecification } from "../../util/CreatePostSpecification";
 import SendIcon from "@mui/icons-material/Send";
-import AppContext from "../../context/AppContext";
+import { AppContext } from "../../context";
+import { MultiSelect } from "../../util/reuseableComponents/MultiSelect";
+import { Loading } from "../../util/reuseableComponents/Loading";
 
 export default function CreatePost() {
   const [categories, setCategories] = useState(getCategoryNames());
   const { authenticatedUser } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [subcategories, setSubcategories] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubcategory, setSelectedSubcategory] = useState("");
@@ -69,7 +70,7 @@ export default function CreatePost() {
       alert("You have to log in first before you can create a post");
       return;
     }
-    setLoading(true);
+    setIsLoading(true);
     const post = {
       creationDateOfPost: new Date().toLocaleDateString(),
       category: selectedCategory,
@@ -100,7 +101,7 @@ export default function CreatePost() {
 
     post.images = imageBlobs;
     await authenticatedUser.createPost(post);
-    setLoading(false);
+    setIsLoading(false);
     setOpenSnackBar(true);
   }
 
@@ -213,18 +214,18 @@ export default function CreatePost() {
             })}
           </Stack>
         </Box>
-        <Box style={{ display: "flex", marginTop: "40px" }}>
+        <Box style={{ marginTop: "40px" }}>
           <Button
             variant="contained"
             endIcon={<SendIcon />}
             type="submit"
-            disabled={loading}
+            disabled={isLoading}
             style={{ marginRight: "40px" }}
           >
             Create post
           </Button>
-          {loading && <CircularProgress />}
         </Box>
+        {Loading(isLoading)}
       </Box>
       <Snackbar
         open={openSnackBar}

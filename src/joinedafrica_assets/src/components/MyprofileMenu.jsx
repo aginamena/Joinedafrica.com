@@ -4,7 +4,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { deepPurple } from "@mui/material/colors";
 import { LoginUser } from "../util/auth";
 import { Link } from "react-router-dom";
-import AppContext from "../context/AppContext";
+import { AppContext } from "../context";
 
 export default function MyProfileMenu() {
   const { setAuthenticatedUser } = useContext(AppContext);
