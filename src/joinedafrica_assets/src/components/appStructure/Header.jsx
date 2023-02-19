@@ -7,22 +7,15 @@ import {
   Stack,
   Badge,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import MyProfileMenu from "./MyprofileMenu";
+import MyProfileMenu from "../MyAccount/MyprofileMenu";
+import {
+  InputContainer,
+  SearchIconCmp,
+} from "../../styling/appStructure/Header";
 
 export default function Header() {
-  const InputContainer = styled("div")({
-    color: "white",
-    backgroundColor: "white",
-    display: "flex",
-    alignItems: "center",
-    borderRadius: "10px",
-    width: "500px",
-  });
-
   return (
     <AppBar position="fixed" sx={{ zIndex: "1201" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -30,13 +23,10 @@ export default function Header() {
           Joined Africa
         </Typography>
         <InputContainer>
-          <SearchIcon
-            sx={{ color: "black", marginRight: "10px", marginLeft: "10px" }}
-          />
+          <SearchIconCmp />
           <Input
             placeholder="search..."
             sx={{ width: "100%", color: "black" }}
-            // sx={{ }}
           />
         </InputContainer>
         <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>

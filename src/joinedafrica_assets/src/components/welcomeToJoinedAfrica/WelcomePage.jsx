@@ -1,9 +1,8 @@
 import React from "react";
 import { Container, Box, Typography, Button, Stack } from "@mui/material";
-
-import { Greeting, Introduction } from "../styling/WelcomePage";
 import HowWeStandOut from "./HowWeStandOut";
 import { Link } from "react-router-dom";
+import { Greeting, Introduction } from "../../styling/WelcomePage";
 
 export default function WelcomePage() {
   return (

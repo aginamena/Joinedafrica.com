@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Drawer,
   List,
   ListItem,
   ListItemButton,
@@ -9,19 +8,11 @@ import {
   ListItemIcon,
   Typography,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-// import DirectionsCarIcon from "@smui/icons-material/DirectionsCar";
-import { categories } from "../util/ListOfCategories";
 import { Link } from "react-router-dom";
+import { categories } from "../../util/ListOfCategories";
+import { DrawerContainer } from "../../styling/appStructure/LeftBar";
 
 export default function LeftBar() {
-  const DrawerContainer = styled(Drawer)({
-    "& .MuiDrawer-paper": {
-      width: "300px",
-      boxSizing: "border-box",
-    },
-  });
-
   return (
     <DrawerContainer variant="permanent" anchor="left">
       <Toolbar />

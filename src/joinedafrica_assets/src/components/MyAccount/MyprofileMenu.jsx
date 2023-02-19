@@ -2,9 +2,9 @@ import React, { useState, useContext } from "react";
 import { Button, Box, Menu, MenuItem, Avatar } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { deepPurple } from "@mui/material/colors";
-import { LoginUser } from "../util/auth";
 import { Link } from "react-router-dom";
-import { AppContext } from "../context";
+import { LoginUser } from "../../util/auth";
+import { AppContext } from "../../context";
 
 export default function MyProfileMenu() {
   const { setAuthenticatedUser } = useContext(AppContext);

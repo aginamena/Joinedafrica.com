@@ -2,10 +2,9 @@ import React from "react";
 import { Box, Container, Toolbar } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Header from "../Header";
 import CreatePost from "./CreatePosts";
 import MyPostings from "./MyPostings";
+import Header from "../appStructure/Header";
 
 export default function MyAccount() {
   function TabPanel(props) {

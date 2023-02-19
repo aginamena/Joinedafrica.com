@@ -1,0 +1,28 @@
+type UserId = principal;
+type Post = 
+ record {
+   amount: text;
+   category: text;
+   condition: text;
+   creationDateOfPost: text;
+   images: vec vec nat8;
+   productDescription: text;
+   productSpecification:
+    record {
+      durationOfRenting: int;
+      gender: text;
+      hasParkingSpace: bool;
+      isFurnished: bool;
+      model: text;
+      nameOfManufacturer: text;
+      numberOfPlots: int;
+      yearOfManufacture: int;
+    };
+   productTitle: text;
+   subcategory: text;
+ };
+service : {
+  createPost: (Post) -> ();
+  getAllMyPostings: () -> (vec Post);
+  whoAmI: () -> (UserId);
+}
