@@ -5,8 +5,8 @@ import {
   createActor,
 } from "../../../declarations/joinedafrica/index";
 
-//log the user in through the internet identity and saves the authenticated actor, which is the user
-export async function LoginUser(setAuthenticatedUser) {
+//Authenticate using internet identity and saves the authenticated actor, which is the user
+export async function InternetIdentityAuthentication(setAuthenticatedUser) {
   const authClient = await AuthClient.create();
   if (await authClient.isAuthenticated()) {
     const identity = await authClient.getIdentity();
@@ -34,3 +34,5 @@ export async function LoginUser(setAuthenticatedUser) {
     });
   }
 }
+
+export async function saveUserProfile() {}

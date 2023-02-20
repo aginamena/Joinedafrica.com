@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   AppBar,
   Toolbar,
@@ -6,6 +6,7 @@ import {
   Input,
   Stack,
   Badge,
+  Button,
 } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -14,8 +15,11 @@ import {
   InputContainer,
   SearchIconCmp,
 } from "../../styling/appStructure/Header";
+import { AppContext } from "../../context";
+import { Link } from "react-router-dom";
 
 export default function Header() {
+  const { authenticatedUser } = useContext(AppContext);
   return (
     <AppBar position="fixed" sx={{ zIndex: "1201" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -30,13 +34,28 @@ export default function Header() {
           />
         </InputContainer>
         <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
-          <Badge badgeContent={4} color="primary">
-            <MailIcon color="action" />
-          </Badge>
-          <Badge>
-            <NotificationsNoneIcon color="action" />
-          </Badge>
-          <MyProfileMenu />
+          {authenticatedUser ? (
+            <>
+              <Badge badgeContent={4} color="primary">
+                <MailIcon color="action" />
+              </Badge>
+              <Badge>
+                <NotificationsNoneIcon color="action" />
+              </Badge>
+              <MyProfileMenu />
+            </>
+          ) : (
+            <>
+              <Link
+                to="/auth/create-profile"
+                style={{ textDecoration: "none" }}
+              >
+                <Button variant="outlined">Create Profile</Button>
+              </Link>
+
+              <Button variant="outlined">Log in</Button>
+            </>
+          )}
         </Stack>
       </Toolbar>
     </AppBar>

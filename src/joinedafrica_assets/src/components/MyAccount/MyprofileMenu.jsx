@@ -3,7 +3,7 @@ import { Button, Box, Menu, MenuItem, Avatar } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { deepPurple } from "@mui/material/colors";
 import { Link } from "react-router-dom";
-import { LoginUser } from "../../util/auth";
+import { InternetIdentityAuthentication } from "../../util/auth";
 import { AppContext } from "../../context";
 
 export default function MyProfileMenu() {
@@ -37,7 +37,9 @@ export default function MyProfileMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={() => LoginUser(setAuthenticatedUser)}>
+        <MenuItem
+          onClick={() => InternetIdentityAuthentication(setAuthenticatedUser)}
+        >
           Log in
         </MenuItem>
         <MenuItem onClick={handleClose}>My postings</MenuItem>

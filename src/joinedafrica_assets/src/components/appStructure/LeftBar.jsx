@@ -6,22 +6,19 @@ import {
   ListItemText,
   Toolbar,
   ListItemIcon,
-  Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { categories } from "../../util/ListOfCategories";
-import { DrawerContainer } from "../../styling/appStructure/LeftBar";
+import {
+  DrawerContainer,
+  TypographyCmp,
+} from "../../styling/appStructure/LeftBar";
 
 export default function LeftBar() {
   return (
     <DrawerContainer variant="permanent" anchor="left">
       <Toolbar />
-      <Typography
-        variant="h5"
-        sx={{ marginTop: "50px", marginBottom: "20px", textAlign: "center" }}
-      >
-        All categories
-      </Typography>
+      <TypographyCmp variant="h5">All categories</TypographyCmp>
       <List>
         {categories.map((category, index) => (
           <ListItem key={index} disablePadding>

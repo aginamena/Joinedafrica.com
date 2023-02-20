@@ -118,7 +118,6 @@ export default function CreatePost() {
               listOfElements={categories}
               clickedValue={(categoryName) => {
                 setSubcategories(getsubcategory(categoryName));
-                // console.log(typeof categoryName);
                 setSelectedCategory(categoryName);
               }}
             />
@@ -216,11 +215,10 @@ export default function CreatePost() {
         </Box>
         <Box style={{ marginTop: "40px" }}>
           <Button
-            variant="contained"
+            variant="outlined"
             endIcon={<SendIcon />}
             type="submit"
             disabled={isLoading}
-            style={{ marginRight: "40px" }}
           >
             Create post
           </Button>

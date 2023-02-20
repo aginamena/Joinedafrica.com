@@ -7,6 +7,7 @@ import MyAccount from "./components/MyAccount/MyAccount";
 import { AppContext } from "./context";
 import Body from "./components/appStructure/Body";
 import WelcomePage from "./components/welcomeToJoinedAfrica/WelcomePage";
+import CreateProfile from "./components/auth/CreateProfile";
 
 export default function App() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
@@ -36,6 +37,11 @@ export default function App() {
               exact
               path="/home/myaccount/:tabName"
               element={<MyAccount />}
+            />
+            <Route
+              exact
+              path="auth/create-profile"
+              element={<CreateProfile />}
             />
           </Routes>
         </BrowserRouter>

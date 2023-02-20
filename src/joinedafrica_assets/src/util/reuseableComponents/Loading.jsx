@@ -7,7 +7,6 @@ export function Loading(isLoading) {
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isLoading}
-        // onClick={() => setIsLoading(false)}
       >
         <CircularProgress color="inherit" />
       </Backdrop>

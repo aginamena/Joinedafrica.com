@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import React from "react";
+import { Box, InputLabel, MenuItem, FormControl, Select } from "@mui/material";
 
 export function MultiSelect({ name, listOfElements, clickedValue }) {
-  // const [selectedValue, setSelectedValue] = useState("");
-
   return (
     <Box>
       <FormControl fullWidth>
