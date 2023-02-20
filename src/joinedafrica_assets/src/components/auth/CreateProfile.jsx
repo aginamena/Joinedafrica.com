@@ -2,10 +2,7 @@ import React, { useContext, useState } from "react";
 import { Container, TextField, Box, Typography, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import {
-  InternetIdentityAuthentication,
-  saveUserProfile,
-} from "../../util/auth";
+import { InternetIdentityAuthentication } from "../../util/auth";
 import { Loading } from "../../util/reuseableComponents/Loading";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context";
@@ -16,10 +13,13 @@ import {
 } from "../../styling/auth/CreateProfile";
 
 export default function CreateProfile() {
-  const [image, setImage] = useState(null);
-  const [userName, setUserName] = useState("");
-  const [emailAddress, setEmailAddress] = useState("");
   const [actor, setActor] = useState(null);
+  const [userProfile, setUserProfile] = useState({
+    profilePicture: null,
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
   const [isLoading, setIsLoading] = useState(false);
 
   // after the user authenticates using the internet Identity, we store the authenticated actor in app state
@@ -35,7 +35,19 @@ export default function CreateProfile() {
       return;
     }
     setIsLoading(true);
-    await saveUserProfile(image, userName, emailAddress, actor);
+    let imageToBinary = null;
+    if (userProfile.profilePicture != null) {
+      imageToBinary = new Uint8Array(
+        await userProfile.profilePicture.arrayBuffer()
+      );
+    }
+
+    await actor.createUserProfile({
+      profilePicture: imageToBinary,
+      firstName: userProfile.firstName,
+      lastName: userProfile.lastName,
+      email,
+    });
     setIsLoading(false);
     setAuthenticatedUser(actor);
     navigate("/home");
@@ -52,9 +64,9 @@ export default function CreateProfile() {
         </Typography>
         <Box>
           <ImageContainer>
-            {image && (
+            {userProfile.profilePicture && (
               <Image
-                src={URL.createObjectURL(image)}
+                src={URL.createObjectURL(userProfile.profilePicture)}
                 alt="User selected profile"
               />
             )}
@@ -62,18 +74,34 @@ export default function CreateProfile() {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-            required
+            onChange={(e) =>
+              setUserProfile({
+                ...userProfile,
+                profilePicture: e.target.files[0],
+              })
+            }
           />
           <Typography>Choose profile image</Typography>
         </Box>
         <TextField
           fullWidth
-          label="Enter your username"
+          label="Enter your first name"
+          variant="outlined"
+          style={{ marginTop: "30px" }}
+          required
+          onChange={(e) =>
+            setUserProfile({ ...userProfile, firstName: e.target.value })
+          }
+        />
+        <TextField
+          fullWidth
+          label="Enter your last name"
           variant="outlined"
           style={{ margin: "30px 0" }}
           required
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={(e) =>
+            setUserProfile({ ...userProfile, lastName: e.target.value })
+          }
         />
         <TextField
           label="Enter your email address"
@@ -81,7 +109,9 @@ export default function CreateProfile() {
           type="email"
           variant="outlined"
           required
-          onChange={(e) => setEmailAddress(e.target.value)}
+          onChange={(e) =>
+            setUserProfile({ ...userProfile, email: e.target.value })
+          }
         />
         <IdentitySetup onClick={() => InternetIdentityAuthentication(setActor)}>
           <Typography style={{ marginRight: "5px" }}>

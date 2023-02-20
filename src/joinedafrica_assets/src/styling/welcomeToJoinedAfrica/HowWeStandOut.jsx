@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
 
-export const HowWeStandOutContainer = styled("Box")({
+export const HowWeStandOutContainer = styled(Box)({
   display: "flex",
   justifyContent: "space-around",
   alignItems: "center",

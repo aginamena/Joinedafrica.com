@@ -34,5 +34,3 @@ export async function InternetIdentityAuthentication(setAuthenticatedUser) {
     });
   }
 }
-
-export async function saveUserProfile() {}

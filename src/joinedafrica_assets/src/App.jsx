@@ -11,6 +11,12 @@ import CreateProfile from "./components/auth/CreateProfile";
 
 export default function App() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
+  const [userProfile, setUserProfile] = useState({
+    profilePicture: null,
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
 
   const darkTheme = createTheme({
     palette: {
@@ -24,8 +30,10 @@ export default function App() {
     () => ({
       authenticatedUser,
       setAuthenticatedUser,
+      userProfile,
+      setUserProfile,
     }),
-    [authenticatedUser]
+    [authenticatedUser, userProfile]
   );
 
   return (

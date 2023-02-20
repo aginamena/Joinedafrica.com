@@ -29,10 +29,9 @@ module {
     };
 
     public type Profile = {
-        id : UserId;
         firstName : Text;
         lastName : Text;
-        profilePicture : [Nat8];
+        profilePicture : ?[Nat8];
         email : Text;
     };
 

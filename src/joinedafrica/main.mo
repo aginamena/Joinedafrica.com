@@ -11,6 +11,7 @@ actor Backend {
   type Category = Text;
   type Post = Type.Post;
   type UserId = Type.UserId;
+  type Profile = Type.Profile;
 
   //publishedPosts contains all published posts (visible to other users)
   var publishedPosts : Posts.PublishedPosts = Posts.PublishedPosts();
@@ -28,5 +29,10 @@ actor Backend {
   //get the principal id of the caller
   public shared ({ caller }) func whoAmI() : async UserId {
     return caller;
+  };
+
+  //new users have to create their profile to gain more access to the site.
+  public shared ({ caller }) func createUserProfile(profile : Profile) : async () {
+
   };
 };
