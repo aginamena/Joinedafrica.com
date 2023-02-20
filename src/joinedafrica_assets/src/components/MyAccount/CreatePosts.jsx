@@ -9,10 +9,7 @@ import {
   OutlinedInput,
   InputAdornment,
   Button,
-  CircularProgress,
-  Snackbar,
 } from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
 import { getCategoryNames, getsubcategory } from "../../util/ListOfCategories";
 import { PostImage } from "../../styling/CreatePosts";
 import { CreatePostSpecification } from "../../util/CreatePostSpecification";
@@ -41,22 +38,11 @@ export default function CreatePost() {
   const [hasParkingSpace, setHasParkingSpace] = useState("");
   const [durationOfRenting, setDurationOfRenting] = useState("0");
   const [numberOfPlots, setNumberOfPlots] = useState("0");
-  const [openSnackBar, setOpenSnackBar] = useState(false);
 
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSnackBar(false);
-  };
+  const MAXIMUM_NUMBER_OF_IMAGES = 3;
 
   function addImages(event) {
-    if (selectedImages.length == 3) {
+    if (selectedImages.length == MAXIMUM_NUMBER_OF_IMAGES) {
       alert("The maximum number of images to add is 3");
       return;
     }
@@ -91,6 +77,7 @@ export default function CreatePost() {
       },
     };
 
+    //converting the images to blobs
     const imageBlobs = [];
     await Promise.all(
       selectedImages.map(async (image) => {
@@ -102,138 +89,119 @@ export default function CreatePost() {
     post.images = imageBlobs;
     await authenticatedUser.createPost(post);
     setIsLoading(false);
-    setOpenSnackBar(true);
+    alert("Your post has been created!");
+    //go to my postings page
   }
 
   return (
-    <>
-      <Box component="form" autoComplete="off" onSubmit={createPost}>
-        <Box>
-          <Typography style={{ marginBottom: "10px" }}>
-            Product category
-          </Typography>
-          <Stack spacing={2}>
-            <MultiSelect
-              name="Product category"
-              listOfElements={categories}
-              clickedValue={(categoryName) => {
-                setSubcategories(getsubcategory(categoryName));
-                setSelectedCategory(categoryName);
-              }}
-            />
-            <MultiSelect
-              name="sub-category"
-              listOfElements={subcategories}
-              clickedValue={(subcategoryName) =>
-                setSelectedSubcategory(subcategoryName)
-              }
-            />
-          </Stack>
-        </Box>
-        <Box style={{ marginBottom: "35px", marginTop: "35px" }}>
-          <Typography style={{ marginBottom: "10px" }}>Add image(s)</Typography>
-          <PostImage>
-            <Box>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={addImages}
-                required
-              />
-
-              <Typography>
-                Add some images. You can add up to 3 images
-              </Typography>
-            </Box>
-          </PostImage>
-          <Divider />
-          <Stack direction="row" spacing={2} style={{ marginTop: "20px" }}>
-            {selectedImages.map((file, index) => (
-              <Box key={index} style={{ width: "200px", height: "200px" }}>
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt="Posting preview"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
-              </Box>
-            ))}
-          </Stack>
-        </Box>
-        <Box>
-          <Typography style={{ marginBottom: "10px" }}>
-            Product details
-          </Typography>
-          <Stack spacing={2}>
-            <TextField
-              required
-              label="Product title"
-              variant="outlined"
-              onChange={(e) => setProductTitle(e.target.value)}
-            />
-            <Box>
-              <InputLabel htmlFor="outlined-adornment-amount">
-                Amount
-              </InputLabel>
-              <OutlinedInput
-                style={{ width: "100%" }}
-                id="outlined-adornment-amount"
-                required
-                startAdornment={
-                  <InputAdornment position="start">BTC</InputAdornment>
-                }
-                onChange={(e) => setAmount(e.target.value)}
-              />
-            </Box>
-            <TextField
-              required
-              label="Product description"
-              variant="outlined"
-              multiline
-              rows={7}
-              placeholder="What other details do you want buyers to know about?"
-              onChange={(e) => setProductDescription(e.target.value)}
-            />
-            <MultiSelect
-              name="Condition"
-              listOfElements={["new", "used"]}
-              clickedValue={(condition) => setCondition(condition)}
-            />
-            {CreatePostSpecification(selectedCategory, selectedSubcategory, {
-              setYearOfManufacture,
-              setNameOfManufacturer,
-              setModel,
-              setGender,
-              setIsFurnished,
-              setHasParkingSpace,
-              setDurationOfRenting,
-              setNumberOfPlots,
-            })}
-          </Stack>
-        </Box>
-        <Box style={{ marginTop: "40px" }}>
-          <Button
-            variant="outlined"
-            endIcon={<SendIcon />}
-            type="submit"
-            disabled={isLoading}
-          >
-            Create post
-          </Button>
-        </Box>
-        {Loading(isLoading)}
+    <Box component="form" autoComplete="off" onSubmit={createPost}>
+      <Box>
+        <Typography style={{ marginBottom: "10px" }}>
+          Product category
+        </Typography>
+        <Stack spacing={2}>
+          <MultiSelect
+            name="Product category"
+            listOfElements={categories}
+            clickedValue={(categoryName) => {
+              setSubcategories(getsubcategory(categoryName));
+              setSelectedCategory(categoryName);
+            }}
+          />
+          <MultiSelect
+            name="sub-category"
+            listOfElements={subcategories}
+            clickedValue={(subcategoryName) =>
+              setSelectedSubcategory(subcategoryName)
+            }
+          />
+        </Stack>
       </Box>
-      <Snackbar
-        open={openSnackBar}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="success">
-          Post has been created!
-        </Alert>
-      </Snackbar>
-    </>
+      <Box style={{ marginBottom: "35px", marginTop: "35px" }}>
+        <Typography style={{ marginBottom: "10px" }}>Add image(s)</Typography>
+        <PostImage>
+          <Box>
+            <input type="file" accept="image/*" onChange={addImages} required />
+
+            <Typography>Add some images. You can add up to 3 images</Typography>
+          </Box>
+        </PostImage>
+        <Divider />
+        <Stack direction="row" spacing={2} style={{ marginTop: "20px" }}>
+          {selectedImages.map((file, index) => (
+            <Box key={index} style={{ width: "200px", height: "200px" }}>
+              <img
+                src={URL.createObjectURL(file)}
+                alt="Posting preview"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            </Box>
+          ))}
+        </Stack>
+      </Box>
+      <Box>
+        <Typography style={{ marginBottom: "10px" }}>
+          Product details
+        </Typography>
+        <Stack spacing={2}>
+          <TextField
+            required
+            label="Product title"
+            variant="outlined"
+            onChange={(e) => setProductTitle(e.target.value)}
+          />
+          <Box>
+            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+            <OutlinedInput
+              style={{ width: "100%" }}
+              id="outlined-adornment-amount"
+              required
+              startAdornment={
+                <InputAdornment position="start">BTC</InputAdornment>
+              }
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </Box>
+          <TextField
+            required
+            label="Product description"
+            variant="outlined"
+            multiline
+            rows={7}
+            placeholder="What other details do you want buyers to know about?"
+            onChange={(e) => setProductDescription(e.target.value)}
+          />
+          <MultiSelect
+            name="Condition"
+            listOfElements={["new", "used"]}
+            clickedValue={(condition) => setCondition(condition)}
+          />
+          {CreatePostSpecification(selectedCategory, selectedSubcategory, {
+            setYearOfManufacture,
+            setNameOfManufacturer,
+            setModel,
+            setGender,
+            setIsFurnished,
+            setHasParkingSpace,
+            setDurationOfRenting,
+            setNumberOfPlots,
+          })}
+        </Stack>
+      </Box>
+      <Box style={{ marginTop: "40px" }}>
+        <Button
+          variant="outlined"
+          endIcon={<SendIcon />}
+          type="submit"
+          disabled={isLoading}
+        >
+          Create post
+        </Button>
+      </Box>
+      {Loading(isLoading)}
+    </Box>
   );
 }

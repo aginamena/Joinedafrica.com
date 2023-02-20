@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -11,15 +11,23 @@ import CreateProfile from "./components/auth/CreateProfile";
 
 export default function App() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
+
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
     },
   });
-  const stateValues = {
-    authenticatedUser,
-    setAuthenticatedUser,
-  };
+
+  //using useMemo so that when one of the dependencies change, we only update the corresponding state value and
+  //not create the whole stateValues object again!
+  const stateValues = useMemo(
+    () => ({
+      authenticatedUser,
+      setAuthenticatedUser,
+    }),
+    [authenticatedUser]
+  );
+
   return (
     <AppContext.Provider value={stateValues}>
       <ThemeProvider theme={darkTheme}>

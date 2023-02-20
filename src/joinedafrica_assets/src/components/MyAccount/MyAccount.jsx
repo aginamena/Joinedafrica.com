@@ -6,22 +6,23 @@ import CreatePost from "./CreatePosts";
 import MyPostings from "./MyPostings";
 import Header from "../appStructure/Header";
 
-export default function MyAccount() {
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
-        {...other}
-      >
-        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-      </div>
-    );
-  }
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
+export default function MyAccount() {
   function a11yProps(index) {
     return {
       id: `vertical-tab-${index}`,

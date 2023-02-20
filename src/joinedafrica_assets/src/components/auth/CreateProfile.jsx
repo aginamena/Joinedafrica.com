@@ -9,6 +9,11 @@ import {
 import { Loading } from "../../util/reuseableComponents/Loading";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context";
+import {
+  Image,
+  IdentitySetup,
+  ImageContainer,
+} from "../../styling/auth/CreateProfile";
 
 export default function CreateProfile() {
   const [image, setImage] = useState(null);
@@ -17,8 +22,10 @@ export default function CreateProfile() {
   const [actor, setActor] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  // after the user authenticates using the internet Identity, we store the authenticated actor in app state
   const { setAuthenticatedUser } = useContext(AppContext);
 
+  // navigation so we can go back to the home page after saving the users profile
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -44,26 +51,14 @@ export default function CreateProfile() {
           Create profile
         </Typography>
         <Box>
-          <Box
-            style={{
-              width: "100px",
-              height: "100px",
-              borderRadius: "50px",
-              border: "1px solid white",
-            }}
-          >
+          <ImageContainer>
             {image && (
-              <img
+              <Image
                 src={URL.createObjectURL(image)}
                 alt="User selected profile"
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  borderRadius: "50px",
-                }}
               />
             )}
-          </Box>
+          </ImageContainer>
           <input
             type="file"
             accept="image/*"
@@ -88,21 +83,12 @@ export default function CreateProfile() {
           required
           onChange={(e) => setEmailAddress(e.target.value)}
         />
-        <Button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: "0",
-            margin: "30px 0",
-          }}
-          onClick={() => InternetIdentityAuthentication(setActor)}
-        >
+        <IdentitySetup onClick={() => InternetIdentityAuthentication(setActor)}>
           <Typography style={{ marginRight: "5px" }}>
             Set up your identity
           </Typography>
           <OpenInNewIcon />
-        </Button>
-
+        </IdentitySetup>
         <Box style={{ marginTop: "40px" }}>
           <Button variant="outlined" endIcon={<SendIcon />} type="submit">
             Create Profile
