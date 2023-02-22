@@ -19,9 +19,16 @@ export const idlFactory = ({ IDL }) => {
     'condition' : IDL.Text,
     'images' : IDL.Vec(IDL.Vec(IDL.Nat8)),
   });
+  const Profile = IDL.Record({
+    'email' : IDL.Text,
+    'profilePicture' : IDL.Opt(IDL.Vec(IDL.Nat8)),
+    'lastName' : IDL.Text,
+    'firstName' : IDL.Text,
+  });
   const UserId = IDL.Principal;
   return IDL.Service({
     'createPost' : IDL.Func([Post], [], []),
+    'createUserProfile' : IDL.Func([Profile], [], []),
     'getAllMyPostings' : IDL.Func([], [IDL.Vec(Post)], []),
     'whoAmI' : IDL.Func([], [UserId], []),
   });

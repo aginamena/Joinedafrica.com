@@ -6,7 +6,8 @@
     },
     "joinedafrica_assets": {
       "dependencies": [
-        "joinedafrica"
+        "joinedafrica",
+        "internet_identity"
       ],
       "frontend": {
         "entrypoint": "src/joinedafrica_assets/src/index.html"
@@ -36,7 +37,7 @@
       "packtool": ""
     }
   },
-  "dfx": "0.9.3",
+  "dfx": "0.12.1",
   "networks": {
     "local": {
       "bind": "127.0.0.1:8000",

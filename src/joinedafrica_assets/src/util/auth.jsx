@@ -18,10 +18,7 @@ export async function InternetIdentityAuthentication(setAuthenticatedUser) {
     setAuthenticatedUser(authenticatedUser);
   } else {
     await authClient.login({
-      identityProvider:
-        process.env.NODE_ENV === "production"
-          ? "https://identity.ic0.app/#authorize"
-          : "http://127.0.0.1:8000/?canisterId=rwlgt-iiaaa-aaaaa-aaaaa-cai",
+      identityProvider: process.env.INTERNET_IDENTITY_URL,
       onSuccess: async () => {
         const identity = await authClient.getIdentity();
         const authenticatedUser = createActor(canisterId, {
