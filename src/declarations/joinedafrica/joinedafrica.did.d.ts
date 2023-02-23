@@ -23,7 +23,7 @@ export interface Post {
 }
 export interface Profile {
   'email' : string,
-  'profilePicture' : [] | [Uint8Array],
+  'profilePicture' : Uint8Array,
   'lastName' : string,
   'firstName' : string,
 }

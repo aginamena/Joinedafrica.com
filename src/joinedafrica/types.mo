@@ -31,7 +31,7 @@ module {
     public type Profile = {
         firstName : Text;
         lastName : Text;
-        profilePicture : ?[Nat8];
+        profilePicture : [Nat8];
         email : Text;
     };
 

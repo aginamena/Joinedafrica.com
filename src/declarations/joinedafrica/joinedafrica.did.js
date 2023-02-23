@@ -21,7 +21,7 @@ export const idlFactory = ({ IDL }) => {
   });
   const Profile = IDL.Record({
     'email' : IDL.Text,
-    'profilePicture' : IDL.Opt(IDL.Vec(IDL.Nat8)),
+    'profilePicture' : IDL.Vec(IDL.Nat8),
     'lastName' : IDL.Text,
     'firstName' : IDL.Text,
   });

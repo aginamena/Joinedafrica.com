@@ -9,6 +9,7 @@
     "Canister"
   ],
   "scripts": {
+    "generate": "dfx generate joinedafrica",
     "build": "webpack",
     "prebuild": "npm run copy:types",
     "start": "webpack serve --mode development --env development",
@@ -46,6 +47,7 @@
   ],
   "dependencies": {
     "@dfinity/auth-client": "^0.15.1",
+    "@dfinity/assets": "0.15.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",

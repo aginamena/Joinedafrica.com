@@ -4,7 +4,7 @@ type Profile =
    email: text;
    firstName: text;
    lastName: text;
-   profilePicture: opt vec nat8;
+   profilePicture: vec nat8;
  };
 type Post = 
  record {

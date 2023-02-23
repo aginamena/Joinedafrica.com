@@ -2,7 +2,10 @@ import React, { useContext, useState } from "react";
 import { Container, TextField, Box, Typography, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { InternetIdentityAuthentication } from "../../util/auth";
+import {
+  InternetIdentityAuthentication,
+  uploadImageToAssetCanister,
+} from "../../util/auth";
 import { Loading } from "../../util/reuseableComponents/Loading";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context";
@@ -20,6 +23,7 @@ export default function CreateProfile() {
     lastName: "",
     email: "",
   });
+  const [identity, setIdentity] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   // after the user authenticates using the internet Identity, we store the authenticated actor in app state
@@ -35,22 +39,25 @@ export default function CreateProfile() {
       return;
     }
     setIsLoading(true);
-    let imageToBinary = null;
-    if (userProfile.profilePicture != null) {
-      imageToBinary = new Uint8Array(
-        await userProfile.profilePicture.arrayBuffer()
-      );
-    }
 
-    await actor.createUserProfile({
-      profilePicture: imageToBinary,
-      firstName: userProfile.firstName,
-      lastName: userProfile.lastName,
-      email,
-    });
-    setIsLoading(false);
-    setAuthenticatedUser(actor);
-    navigate("/home");
+    // const imageToBinary = new Uint8Array(
+    //   await userProfile.profilePicture.arrayBuffer()
+    // );
+
+    const imagePath = await uploadImageToAssetCanister(
+      userProfile.profilePicture,
+      identity
+    );
+    console.log(imagePath);
+    // await actor.createUserProfile({
+    //   profilePicture: imageToBinary,
+    //   firstName: userProfile.firstName,
+    //   lastName: userProfile.lastName,
+    //   email: userProfile.email,
+    // });
+    // setIsLoading(false);
+    // setAuthenticatedUser(actor);
+    // navigate("/home");
   }
   return (
     <>
@@ -74,6 +81,7 @@ export default function CreateProfile() {
           <input
             type="file"
             accept="image/*"
+            required
             onChange={(e) =>
               setUserProfile({
                 ...userProfile,
@@ -113,7 +121,9 @@ export default function CreateProfile() {
             setUserProfile({ ...userProfile, email: e.target.value })
           }
         />
-        <IdentitySetup onClick={() => InternetIdentityAuthentication(setActor)}>
+        <IdentitySetup
+          onClick={() => InternetIdentityAuthentication(setActor, setIdentity)}
+        >
           <Typography style={{ marginRight: "5px" }}>
             Set up your identity
           </Typography>

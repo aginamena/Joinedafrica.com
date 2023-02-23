@@ -39,7 +39,7 @@ const canisterEnvVariables = initCanisterEnv();
 
 const internetIdentityUrl =
   network === "local"
-    ? `http://localhost:${process.env.REPLICA_PORT}?canisterId=${process.env.INTERNET_IDENTITY_CANISTER_ID}#authorize`
+    ? `http://localhost:8000/?canisterId=${canisterEnvVariables["INTERNET_IDENTITY_CANISTER_ID"]}`
     : "https://identity.ic0.app/#authorize";
 
 const isDevelopment = process.env.NODE_ENV !== "production";

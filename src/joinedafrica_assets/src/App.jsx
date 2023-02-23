@@ -24,17 +24,12 @@ export default function App() {
     },
   });
 
-  //using useMemo so that when one of the dependencies change, we only update the corresponding state value and
-  //not create the whole stateValues object again!
-  const stateValues = useMemo(
-    () => ({
-      authenticatedUser,
-      setAuthenticatedUser,
-      userProfile,
-      setUserProfile,
-    }),
-    [authenticatedUser, userProfile]
-  );
+  const stateValues = {
+    authenticatedUser,
+    setAuthenticatedUser,
+    userProfile,
+    setUserProfile,
+  };
 
   return (
     <AppContext.Provider value={stateValues}>
