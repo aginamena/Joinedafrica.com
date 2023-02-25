@@ -17,9 +17,10 @@ import {
 } from "../../styling/appStructure/Header";
 import { AppContext } from "../../context";
 import { Link } from "react-router-dom";
+import { InternetIdentityAuthentication } from "../../util/auth";
 
 export default function Header() {
-  const { authenticatedUser } = useContext(AppContext);
+  const { authenticatedUser, setAuthenticatedUser } = useContext(AppContext);
   return (
     <AppBar position="fixed" sx={{ zIndex: "1201" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -52,8 +53,16 @@ export default function Header() {
               >
                 <Button variant="outlined">Create Profile</Button>
               </Link>
-
-              <Button variant="outlined">Log in</Button>
+              <Link style={{ textDecoration: "none" }}>
+                <Button
+                  variant="outlined"
+                  onClick={() =>
+                    InternetIdentityAuthentication(setAuthenticatedUser)
+                  }
+                >
+                  Log in
+                </Button>
+              </Link>
             </>
           )}
         </Stack>
