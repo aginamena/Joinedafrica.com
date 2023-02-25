@@ -37,10 +37,9 @@ function initCanisterEnv() {
 
 const canisterEnvVariables = initCanisterEnv();
 
-const internetIdentityUrl =
-  network === "local"
-    ? `http://localhost:8000/?canisterId=${canisterEnvVariables["INTERNET_IDENTITY_CANISTER_ID"]}`
-    : "https://identity.ic0.app/#authorize";
+const internetIdentityUrl = network === "local" ? `http://localhost:8000/?canisterId=${canisterEnvVariables["INTERNET_IDENTITY_CANISTER_ID"]}`: "https://identity.ic0.app/#authorize";
+
+const httpAgent = network === "local" ? "http://localhost:8000" : "https://ic0.app";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -94,6 +93,7 @@ module.exports = {
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: "development",
+      HTTP_AGENT : httpAgent,
       INTERNET_IDENTITY_URL: internetIdentityUrl,
       ...canisterEnvVariables,
     }),

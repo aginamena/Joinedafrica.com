@@ -32,5 +32,6 @@ export interface _SERVICE {
   'createPost' : ActorMethod<[Post], undefined>,
   'createUserProfile' : ActorMethod<[Profile], undefined>,
   'getAllMyPostings' : ActorMethod<[], Array<Post>>,
+  'getUserProfile' : ActorMethod<[], [] | [Profile]>,
   'whoAmI' : ActorMethod<[], UserId>,
 }

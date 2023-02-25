@@ -2,10 +2,7 @@ import React, { useContext, useState } from "react";
 import { Container, TextField, Box, Typography, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import {
-  InternetIdentityAuthentication,
-  uploadImageToAssetCanister,
-} from "../../util/auth";
+import { InternetIdentityAuthentication } from "../../util/auth";
 import { Loading } from "../../util/reuseableComponents/Loading";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context";
@@ -14,6 +11,12 @@ import {
   IdentitySetup,
   ImageContainer,
 } from "../../styling/auth/CreateProfile";
+import { joinedafrica } from "../../../../declarations/joinedafrica/index";
+
+/**
+ * New users are able to create their profile by setting their email, first and last name and profile picture.
+ * They also have to set up their identity using internet identity.
+ */
 
 export default function CreateProfile() {
   const [actor, setActor] = useState(null);
@@ -23,7 +26,6 @@ export default function CreateProfile() {
     lastName: "",
     email: "",
   });
-  const [identity, setIdentity] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   // after the user authenticates using the internet Identity, we store the authenticated actor in app state
@@ -40,24 +42,30 @@ export default function CreateProfile() {
     }
     setIsLoading(true);
 
-    // const imageToBinary = new Uint8Array(
-    //   await userProfile.profilePicture.arrayBuffer()
-    // );
-
-    const imagePath = await uploadImageToAssetCanister(
-      userProfile.profilePicture,
-      identity
+    const imageToBinary = new Uint8Array(
+      await userProfile.profilePicture.arrayBuffer()
     );
-    console.log(imagePath);
-    // await actor.createUserProfile({
-    //   profilePicture: imageToBinary,
-    //   firstName: userProfile.firstName,
-    //   lastName: userProfile.lastName,
-    //   email: userProfile.email,
-    // });
-    // setIsLoading(false);
-    // setAuthenticatedUser(actor);
-    // navigate("/home");
+    const createdProfile = {
+      profilePicture: imageToBinary,
+      firstName: userProfile.firstName,
+      lastName: userProfile.lastName,
+      email: userProfile.email,
+    };
+
+    /**
+     *    we have to be careful with environment our app is running. We could be using the app locally or
+     *    on live internet computer
+     */
+
+    // if (process.env.NODE_ENV === "development") {
+    //   await joinedafrica.createUserProfile(createdProfile);
+    // } else {
+    //   await actor.createUserProfile(createdProfile);
+    // }
+    await actor.createUserProfile(createdProfile);
+    setIsLoading(false);
+    setAuthenticatedUser(actor);
+    navigate("/home");
   }
   return (
     <>
@@ -121,9 +129,7 @@ export default function CreateProfile() {
             setUserProfile({ ...userProfile, email: e.target.value })
           }
         />
-        <IdentitySetup
-          onClick={() => InternetIdentityAuthentication(setActor, setIdentity)}
-        >
+        <IdentitySetup onClick={() => InternetIdentityAuthentication(setActor)}>
           <Typography style={{ marginRight: "5px" }}>
             Set up your identity
           </Typography>

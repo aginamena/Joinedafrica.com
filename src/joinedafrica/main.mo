@@ -5,6 +5,7 @@ import DatabaseStructure "DatabaseStructure";
 import List "mo:base/List";
 import Debug "mo:base/Debug";
 import MyPostings "MyPostings";
+import UserProfiles "UserProfiles";
 
 actor Backend {
 
@@ -20,6 +21,9 @@ actor Backend {
   //myPostings contains all my private postings not yet published
   var myPostings : MyPostings.MyPostings = MyPostings.MyPostings();
 
+  //users take care of all users profile, including create, deleting, searching, and editing profiles
+  var userProfiles : UserProfiles.UserProfiles = UserProfiles.UserProfiles();
+
   public shared ({ caller }) func createPost(post : Post) : async () {
     myPostings.createPost(post, caller);
   };
@@ -33,6 +37,10 @@ actor Backend {
 
   //new users have to create their profile to gain more access to the site.
   public shared ({ caller }) func createUserProfile(profile : Profile) : async () {
+    userProfiles.createUserProfile(profile, caller);
+  };
 
+  public shared ({ caller }) func getUserProfile() : async ?Profile {
+    return userProfiles.getUserProfile(caller);
   };
 };

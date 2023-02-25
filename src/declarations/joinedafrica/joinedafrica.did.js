@@ -30,6 +30,7 @@ export const idlFactory = ({ IDL }) => {
     'createPost' : IDL.Func([Post], [], []),
     'createUserProfile' : IDL.Func([Profile], [], []),
     'getAllMyPostings' : IDL.Func([], [IDL.Vec(Post)], []),
+    'getUserProfile' : IDL.Func([], [IDL.Opt(Profile)], []),
     'whoAmI' : IDL.Func([], [UserId], []),
   });
 };
