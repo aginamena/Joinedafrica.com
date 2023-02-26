@@ -34,7 +34,6 @@ type Post =
    subcategory: text;
  };
 service : {
-  allPrincipals: () -> (vec UserId);
   createPost: (Post) -> ();
   createUserProfile: (Profile) -> (Result);
   getAllMyPostings: () -> (vec Post);

@@ -27,11 +27,14 @@ export interface Profile {
   'lastName' : string,
   'firstName' : string,
 }
+export type Result = { 'ok' : Profile } |
+  { 'err' : string };
 export type UserId = Principal;
 export interface _SERVICE {
+  'allPrincipals' : ActorMethod<[], Array<UserId>>,
   'createPost' : ActorMethod<[Post], undefined>,
-  'createUserProfile' : ActorMethod<[Profile], undefined>,
+  'createUserProfile' : ActorMethod<[Profile], Result>,
   'getAllMyPostings' : ActorMethod<[], Array<Post>>,
-  'getUserProfile' : ActorMethod<[], [] | [Profile]>,
+  'getUserProfile' : ActorMethod<[], Result>,
   'whoAmI' : ActorMethod<[], UserId>,
 }

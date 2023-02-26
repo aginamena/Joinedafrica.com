@@ -11,7 +11,6 @@ import {
   IdentitySetup,
   ImageContainer,
 } from "../../styling/auth/CreateProfile";
-import { joinedafrica } from "../../../../declarations/joinedafrica/index";
 
 /**
  * New users are able to create their profile by setting their email, first and last name and profile picture.
@@ -52,20 +51,14 @@ export default function CreateProfile() {
       email: userProfile.email,
     };
 
-    /**
-     *    we have to be careful with environment our app is running. We could be using the app locally or
-     *    on live internet computer
-     */
-
-    // if (process.env.NODE_ENV === "development") {
-    //   await joinedafrica.createUserProfile(createdProfile);
-    // } else {
-    //   await actor.createUserProfile(createdProfile);
-    // }
-    await actor.createUserProfile(createdProfile);
+    const result = await actor.createUserProfile(createdProfile);
+    if (result?.err) {
+      alert(result.err);
+    } else {
+      setAuthenticatedUser(actor);
+      navigate("/home");
+    }
     setIsLoading(false);
-    setAuthenticatedUser(actor);
-    navigate("/home");
   }
   return (
     <>

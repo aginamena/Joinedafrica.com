@@ -1,4 +1,5 @@
 export const idlFactory = ({ IDL }) => {
+  const UserId = IDL.Principal;
   const Post = IDL.Record({
     'creationDateOfPost' : IDL.Text,
     'productTitle' : IDL.Text,
@@ -25,12 +26,13 @@ export const idlFactory = ({ IDL }) => {
     'lastName' : IDL.Text,
     'firstName' : IDL.Text,
   });
-  const UserId = IDL.Principal;
+  const Result = IDL.Variant({ 'ok' : Profile, 'err' : IDL.Text });
   return IDL.Service({
+    'allPrincipals' : IDL.Func([], [IDL.Vec(UserId)], []),
     'createPost' : IDL.Func([Post], [], []),
-    'createUserProfile' : IDL.Func([Profile], [], []),
+    'createUserProfile' : IDL.Func([Profile], [Result], []),
     'getAllMyPostings' : IDL.Func([], [IDL.Vec(Post)], []),
-    'getUserProfile' : IDL.Func([], [IDL.Opt(Profile)], []),
+    'getUserProfile' : IDL.Func([], [Result], []),
     'whoAmI' : IDL.Func([], [UserId], []),
   });
 };

@@ -6,6 +6,7 @@ import List "mo:base/List";
 import Debug "mo:base/Debug";
 import MyPostings "MyPostings";
 import UserProfiles "UserProfiles";
+import Result "mo:base/Result";
 
 actor Backend {
 
@@ -13,6 +14,7 @@ actor Backend {
   type Post = Type.Post;
   type UserId = Type.UserId;
   type Profile = Type.Profile;
+  type Result<T, E> = Result.Result<T, E>;
 
   //publishedPosts contains all published posts (visible to other users)
   var publishedPosts : Posts.PublishedPosts = Posts.PublishedPosts();
@@ -36,11 +38,14 @@ actor Backend {
   };
 
   //new users have to create their profile to gain more access to the site.
-  public shared ({ caller }) func createUserProfile(profile : Profile) : async () {
+  public shared ({ caller }) func createUserProfile(profile : Profile) : async Result<Profile, Text> {
     userProfiles.createUserProfile(profile, caller);
   };
 
-  public shared ({ caller }) func getUserProfile() : async ?Profile {
+  public shared ({ caller }) func getUserProfile() : async Result<Profile, Text> {
     return userProfiles.getUserProfile(caller);
+  };
+  public func allPrincipals() : async [UserId] {
+    userProfiles.allPrincipals();
   };
 };

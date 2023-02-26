@@ -4,13 +4,16 @@ import LeftBar from "./LeftBar";
 import Feed from "./Feed";
 import Header from "./Header";
 import { AppContext } from "../../context";
+
 export default function Body() {
-  const { authenticatedUser } = useContext(AppContext);
-  // once the user visits the home page, we try to get the users profile information from the backend if the user is authenticated
+  const { setUserProfile, authenticatedUser } = useContext(AppContext);
+
   useEffect(() => {
     async function getUserProfile() {
+      //if the user has be authenticated by internet identity, then we set the profile of the user
       if (authenticatedUser) {
-        await authenticatedUser.getUserProfile();
+        const userProfile = await authenticatedUser.getUserProfile();
+        setUserProfile(userProfile);
       }
     }
     getUserProfile();
