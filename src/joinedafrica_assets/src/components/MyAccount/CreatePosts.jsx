@@ -16,7 +16,7 @@ import { CreatePostSpecification } from "../../util/CreatePostSpecification";
 import SendIcon from "@mui/icons-material/Send";
 import { AppContext } from "../../context";
 import { MultiSelect } from "../../util/reuseableComponents/MultiSelect";
-import { Loading } from "../../util/reuseableComponents/Loading";
+import { LoadingCmp } from "../../util/reuseableComponents/LoadingCmp";
 
 export default function CreatePost() {
   const [categories, setCategories] = useState(getCategoryNames());
@@ -201,7 +201,7 @@ export default function CreatePost() {
           Create post
         </Button>
       </Box>
-      {Loading(isLoading)}
+      {isLoading && LoadingCmp(isLoading)}
     </Box>
   );
 }

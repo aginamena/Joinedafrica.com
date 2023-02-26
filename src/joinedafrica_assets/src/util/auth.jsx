@@ -15,7 +15,8 @@ export async function InternetIdentityAuthentication(setAuthenticatedUser) {
         identity,
       },
     });
-    setAuthenticatedUser(authenticatedUser);
+    // setAuthenticatedUser(authenticatedUser);
+    return authenticatedUser;
   } else {
     await authClient.login({
       identityProvider: process.env.INTERNET_IDENTITY_URL,
@@ -26,7 +27,8 @@ export async function InternetIdentityAuthentication(setAuthenticatedUser) {
             identity,
           },
         });
-        setAuthenticatedUser(authenticatedUser);
+        // setAuthenticatedUser(authenticatedUser);
+        return authenticatedUser;
       },
     });
   }

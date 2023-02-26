@@ -3,7 +3,7 @@ import { Container, TextField, Box, Typography, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { InternetIdentityAuthentication } from "../../util/auth";
-import { Loading } from "../../util/reuseableComponents/Loading";
+import { LoadingCmp } from "../../util/reuseableComponents/LoadingCmp";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context";
 import {
@@ -60,6 +60,7 @@ export default function CreateProfile() {
     }
     setIsLoading(false);
   }
+
   return (
     <>
       <Container
@@ -122,7 +123,9 @@ export default function CreateProfile() {
             setUserProfile({ ...userProfile, email: e.target.value })
           }
         />
-        <IdentitySetup onClick={() => InternetIdentityAuthentication(setActor)}>
+        <IdentitySetup
+          onClick={async () => setActor(await InternetIdentityAuthentication())}
+        >
           <Typography style={{ marginRight: "5px" }}>
             Set up your identity
           </Typography>
@@ -134,7 +137,7 @@ export default function CreateProfile() {
           </Button>
         </Box>
       </Container>
-      {isLoading && Loading(isLoading)}
+      {isLoading && LoadingCmp(isLoading)}
     </>
   );
 }

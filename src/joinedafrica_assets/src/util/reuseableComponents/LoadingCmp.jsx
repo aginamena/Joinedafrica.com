@@ -1,7 +1,7 @@
 import React from "react";
 import { Backdrop, CircularProgress } from "@mui/material";
 
-export function Loading(isLoading) {
+export function LoadingCmp(isLoading) {
   return (
     <div>
       <Backdrop

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import { AppContext } from "../../context";
-import { Loading } from "../../util/reuseableComponents/Loading";
+import { LoadingCmp } from "../../util/reuseableComponents/LoadingCmp";
 import PostingCard from "../../util/reuseableComponents/PostingCard";
 
 export default function MyPostings() {
@@ -18,28 +18,25 @@ export default function MyPostings() {
   }, []);
   return (
     <>
-      {isLoading ? (
-        Loading(isLoading)
-      ) : (
-        <Box>
-          <Grid
-            container
-            spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
-          >
-            {myPostings.map((posting, index) => (
-              <Grid item xs={2} sm={4} md={4} key={index}>
-                <PostingCard
-                  productTitle={posting.productTitle}
-                  creationDateOfPost={posting.creationDateOfPost}
-                  image={posting.images[0]}
-                  productDescription={posting.productDescription}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      )}
+      <Box>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+        >
+          {myPostings.map((posting, index) => (
+            <Grid item xs={2} sm={4} md={4} key={index}>
+              <PostingCard
+                productTitle={posting.productTitle}
+                creationDateOfPost={posting.creationDateOfPost}
+                image={posting.images[0]}
+                productDescription={posting.productDescription}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+      {isLoading && LoadingCmp(isLoading)}
     </>
   );
 }

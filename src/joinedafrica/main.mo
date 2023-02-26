@@ -45,6 +45,8 @@ actor Backend {
   public shared ({ caller }) func getUserProfile() : async Result<Profile, Text> {
     return userProfiles.getUserProfile(caller);
   };
+
+  //test function
   public func allPrincipals() : async [UserId] {
     userProfiles.allPrincipals();
   };
