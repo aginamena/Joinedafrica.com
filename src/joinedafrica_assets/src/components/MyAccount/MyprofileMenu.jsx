@@ -7,7 +7,7 @@ import { InternetIdentityAuthentication } from "../../util/auth";
 import { AppContext } from "../../context";
 
 export default function MyProfileMenu() {
-  const { setAuthenticatedUser } = useContext(AppContext);
+  const { setAuthenticatedUser, userProfile } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -16,6 +16,7 @@ export default function MyProfileMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <Box>
       <Button
@@ -26,7 +27,12 @@ export default function MyProfileMenu() {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+        {/* converting the uint8array back to an image */}
+        <Avatar
+          src={URL.createObjectURL(
+            new Blob([userProfile.profilePicture], { type: "image/png" })
+          )}
+        />
       </Button>
       <Menu
         id="basic-menu"
@@ -37,11 +43,6 @@ export default function MyProfileMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem
-          onClick={() => InternetIdentityAuthentication(setAuthenticatedUser)}
-        >
-          Log in
-        </MenuItem>
         <MenuItem onClick={handleClose}>My postings</MenuItem>
         <MenuItem onClick={handleClose}>My messages</MenuItem>
         <MenuItem onClick={handleClose}>Settings</MenuItem>

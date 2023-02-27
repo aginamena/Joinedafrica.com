@@ -39,7 +39,9 @@ export default function CreatePost() {
   const [durationOfRenting, setDurationOfRenting] = useState("0");
   const [numberOfPlots, setNumberOfPlots] = useState("0");
 
+  //maximum length of characters and number of images
   const MAXIMUM_NUMBER_OF_IMAGES = 3;
+  const MAX_LENGTH_OF_DESCRIPTION = 150;
 
   function addImages(event) {
     if (selectedImages.length == MAXIMUM_NUMBER_OF_IMAGES) {
@@ -54,6 +56,10 @@ export default function CreatePost() {
     event.preventDefault();
     if (authenticatedUser == null) {
       alert("You have to log in first before you can create a post");
+      return;
+    }
+    if (productDescription.length < MAX_LENGTH_OF_DESCRIPTION) {
+      alert("Product description should be more than 149 characters");
       return;
     }
     setIsLoading(true);

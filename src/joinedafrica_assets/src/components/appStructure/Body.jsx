@@ -13,11 +13,11 @@ export default function Body() {
       //if the user has be authenticated by internet identity, then we set the profile of the user
       if (authenticatedUser) {
         const userProfile = await authenticatedUser.getUserProfile();
-        setUserProfile(userProfile);
+        setUserProfile({ ...userProfile.ok });
       }
     }
     getUserProfile();
-  }, []);
+  }, [authenticatedUser]);
   return (
     <>
       <Header />

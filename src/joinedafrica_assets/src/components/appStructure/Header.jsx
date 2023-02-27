@@ -21,7 +21,8 @@ import { InternetIdentityAuthentication } from "../../util/auth";
 import { LoadingCmp } from "../../util/reuseableComponents/LoadingCmp";
 
 export default function Header() {
-  const { authenticatedUser, setAuthenticatedUser } = useContext(AppContext);
+  const { authenticatedUser, setAuthenticatedUser, userProfile } =
+    useContext(AppContext);
   const [actor, setActor] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,7 +32,6 @@ export default function Header() {
       if (actor) {
         setIsLoading(true);
         const result = await actor.getUserProfile();
-        console.log(result);
         if (result?.err) {
           alert(result.err);
         } else {
@@ -66,6 +66,7 @@ export default function Header() {
                   <NotificationsNoneIcon color="action" />
                 </Badge>
                 <MyProfileMenu />
+                {/* {userProfile && } */}
               </>
             ) : (
               <>

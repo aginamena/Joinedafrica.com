@@ -18,24 +18,27 @@ export default function MyPostings() {
   }, []);
   return (
     <>
-      <Box>
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
-          {myPostings.map((posting, index) => (
-            <Grid item xs={2} sm={4} md={4} key={index}>
-              <PostingCard
-                productTitle={posting.productTitle}
-                creationDateOfPost={posting.creationDateOfPost}
-                image={posting.images[0]}
-                productDescription={posting.productDescription}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      {!isLoading && (
+        <Box>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
+            {myPostings.map((posting, index) => (
+              <Grid item xs={2} sm={4} md={4} key={index}>
+                <PostingCard
+                  productTitle={posting.productTitle}
+                  creationDateOfPost={posting.creationDateOfPost}
+                  image={posting.images[0]}
+                  productDescription={posting.productDescription}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
+
       {isLoading && LoadingCmp(isLoading)}
     </>
   );

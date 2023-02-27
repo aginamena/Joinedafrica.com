@@ -34,6 +34,10 @@ export default function PostingCard({
 }) {
   const [expanded, setExpanded] = React.useState(false);
 
+  //maximum length of characters for description and title
+  const MAX_LENGTH_OF_DESCRIPTION = 150;
+  const MAX_lENGTH_OF_TITLE = 25;
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -51,8 +55,12 @@ export default function PostingCard({
             <MoreVertIcon />
           </IconButton>
         }
-        title={productTitle}
-        subheader={creationDateOfPost}
+        title={
+          productTitle.length > MAX_lENGTH_OF_TITLE
+            ? productTitle.substring(0, MAX_lENGTH_OF_TITLE) + "..."
+            : productTitle
+        }
+        subheader={"Created at " + creationDateOfPost}
       />
       <CardMedia
         component="img"
@@ -64,7 +72,9 @@ export default function PostingCard({
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {productDescription}
+          {productDescription.length > MAX_LENGTH_OF_DESCRIPTION
+            ? productDescription.substring(0, MAX_LENGTH_OF_DESCRIPTION) + "..."
+            : productDescription}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

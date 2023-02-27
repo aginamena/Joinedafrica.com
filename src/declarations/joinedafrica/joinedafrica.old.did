@@ -32,5 +32,6 @@ service : {
   createPost: (Post) -> ();
   createUserProfile: (Profile) -> ();
   getAllMyPostings: () -> (vec Post);
+  getUserProfile: () -> (opt Profile);
   whoAmI: () -> (UserId);
 }
