@@ -6,7 +6,9 @@ import Option "mo:base/Option";
 import Debug "mo:base/Debug";
 import Array "mo:base/Array";
 
-//module contains all operations on users create, update, read, delete and so on.
+/**
+    This module contains all operations on users create, update, read, delete and so on.
+*/
 module {
     type UserId = Type.UserId;
     type Profile = Type.Profile;
@@ -36,14 +38,14 @@ module {
             };
         };
         func userHasCreatedProfile(caller : UserId) : Bool {
-            switch(Trie.get(userProfiles, key(caller), Principal.equal)){
+            switch (Trie.get(userProfiles, key(caller), Principal.equal)) {
                 case null false;
-                case (?profile) true
-            }
-            // Option.get(, null) != null;
+                case (?profile) true;
+            };
+
         };
+        //test function
         public func allPrincipals() : [UserId] {
-            // iter : <K, V> Trie<K, V> -> Iter<(K, V)>;
             let iter = Trie.iter(userProfiles);
             var arr : [UserId] = [];
             for ((k, v) in iter) {

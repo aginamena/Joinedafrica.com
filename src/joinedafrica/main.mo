@@ -16,6 +16,10 @@ actor Backend {
   type Profile = Type.Profile;
   type Result<T, E> = Result.Result<T, E>;
 
+  /**
+    All data structures 
+  */
+
   //publishedPosts contains all published posts (visible to other users)
   var publishedPosts : Posts.PublishedPosts = Posts.PublishedPosts();
   publishedPosts.createDatabase(DatabaseStructure.Database);
@@ -23,19 +27,12 @@ actor Backend {
   //myPostings contains all my private postings not yet published
   var myPostings : MyPostings.MyPostings = MyPostings.MyPostings();
 
-  //users take care of all users profile, including create, deleting, searching, and editing profiles
+  //users profile, includes create, deleting, searching, and editing profiles
   var userProfiles : UserProfiles.UserProfiles = UserProfiles.UserProfiles();
 
-  public shared ({ caller }) func createPost(post : Post) : async () {
-    myPostings.createPost(post, caller);
-  };
-  public shared ({ caller }) func getAllMyPostings() : async [Post] {
-    return myPostings.getAllMyPostings(caller);
-  };
-  //get the principal id of the caller
-  public shared ({ caller }) func whoAmI() : async UserId {
-    return caller;
-  };
+  /**
+    The methods below are for user profiles
+  */
 
   //new users have to create their profile to gain more access to the site.
   public shared ({ caller }) func createUserProfile(profile : Profile) : async Result<Profile, Text> {
@@ -44,6 +41,24 @@ actor Backend {
 
   public shared ({ caller }) func getUserProfile() : async Result<Profile, Text> {
     return userProfiles.getUserProfile(caller);
+  };
+
+  /**
+  The methods below are for my Postings. Only me can see.
+*/
+  public shared ({ caller }) func createPost(post : Post) : async () {
+    myPostings.createPost(post, caller);
+  };
+  public shared ({ caller }) func getAllMyPostings() : async [Post] {
+    return myPostings.getAllMyPostings(caller);
+  };
+
+  /**
+    The methods below are test methods
+  */
+  //get the principal id of the caller
+  public shared ({ caller }) func whoAmI() : async UserId {
+    return caller;
   };
 
   //test function

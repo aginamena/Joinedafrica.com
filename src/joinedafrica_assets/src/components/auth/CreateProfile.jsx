@@ -123,9 +123,7 @@ export default function CreateProfile() {
             setUserProfile({ ...userProfile, email: e.target.value })
           }
         />
-        <IdentitySetup
-          onClick={async () => setActor(await InternetIdentityAuthentication())}
-        >
+        <IdentitySetup onClick={() => InternetIdentityAuthentication(setActor)}>
           <Typography style={{ marginRight: "5px" }}>
             Set up your identity
           </Typography>

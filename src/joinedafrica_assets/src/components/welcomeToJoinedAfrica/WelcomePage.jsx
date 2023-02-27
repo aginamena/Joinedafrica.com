@@ -10,7 +10,7 @@ export default function WelcomePage() {
       <Greeting>
         <Typography variant="h6">Welcome to Joined Africa!</Typography>
         <Link to="/home" style={{ textDecoration: "none" }}>
-          <Button variant="contained">View site</Button>
+          <Button variant="contained">Visit site</Button>
         </Link>
       </Greeting>
 

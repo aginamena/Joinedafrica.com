@@ -1,9 +1,4 @@
 type UserId = principal;
-type Result = 
- variant {
-   err: text;
-   ok: Profile;
- };
 type Profile = 
  record {
    email: text;
@@ -35,8 +30,7 @@ type Post =
  };
 service : {
   createPost: (Post) -> ();
-  createUserProfile: (Profile) -> (Result);
+  createUserProfile: (Profile) -> ();
   getAllMyPostings: () -> (vec Post);
-  getUserProfile: () -> (Result);
   whoAmI: () -> (UserId);
 }
