@@ -43,18 +43,15 @@ export default function MyProfileMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>My postings</MenuItem>
-        <MenuItem onClick={handleClose}>My messages</MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
         <MenuItem>
           <Link
-            to="/home/myaccount/create-posts"
+            to="/home/myaccount"
             style={{ color: "white", textDecoration: "none" }}
           >
-            Create posts
+            My Account
           </Link>
         </MenuItem>
-        <MenuItem onClick={handleClose}>Log out</MenuItem>
+        <MenuItem onClick={handleClose}>Log Out</MenuItem>
       </Menu>
     </Box>
   );

@@ -44,11 +44,7 @@ export default function App() {
               path="/home/view/:categoryName"
               element={<ViewCategory />}
             />
-            <Route
-              exact
-              path="/home/myaccount/:tabName"
-              element={<MyAccount />}
-            />
+            <Route exact path="/home/myaccount" element={<MyAccount />} />
             <Route
               exact
               path="auth/create-profile"

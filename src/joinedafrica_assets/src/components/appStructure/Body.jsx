@@ -13,7 +13,14 @@ export default function Body() {
       //if the user has be authenticated by internet identity, then we set the profile of the user
       if (authenticatedUser) {
         const userProfile = await authenticatedUser.getUserProfile();
-        setUserProfile({ ...userProfile.ok });
+        const profile = { ...userProfile.ok };
+        {
+          /* converting the uint8array back to an image */
+        }
+        // profile.profilePicture = URL.createObjectURL(
+        //   new Blob([userProfile.profilePicture], { type: "image/png" })
+        // );
+        setUserProfile({ ...profile });
       }
     }
     getUserProfile();

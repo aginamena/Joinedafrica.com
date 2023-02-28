@@ -1,19 +1,17 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { AppContext } from "../../context";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -32,24 +30,20 @@ export default function PostingCard({
   image,
   productDescription,
 }) {
-  const [expanded, setExpanded] = React.useState(false);
+  const { userProfile } = useContext(AppContext);
 
   //maximum length of characters for description and title
   const MAX_LENGTH_OF_DESCRIPTION = 150;
   const MAX_lENGTH_OF_TITLE = 25;
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const profilePictureURL = URL.createObjectURL(
+    new Blob([userProfile.profilePicture], { type: "image/png" })
+  );
 
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
+        avatar={<Avatar src={profilePictureURL} />}
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
@@ -60,7 +54,7 @@ export default function PostingCard({
             ? productTitle.substring(0, MAX_lENGTH_OF_TITLE) + "..."
             : productTitle
         }
-        subheader={"Created at " + creationDateOfPost}
+        subheader={"Posted at " + creationDateOfPost}
       />
       <CardMedia
         component="img"
