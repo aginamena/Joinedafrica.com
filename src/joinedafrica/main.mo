@@ -15,6 +15,7 @@ actor Backend {
   type UserId = Type.UserId;
   type Profile = Type.Profile;
   type Result<T, E> = Result.Result<T, E>;
+  type PostId = Type.PostId;
 
   /**
     All data structures 
@@ -47,10 +48,14 @@ actor Backend {
   The methods below are for my Postings. Only me can see.
 */
   public shared ({ caller }) func createPost(post : Post) : async () {
+    // Debug.print(debug_show (post));
     myPostings.createPost(post, caller);
   };
   public shared ({ caller }) func getAllMyPostings() : async [Post] {
     return myPostings.getAllMyPostings(caller);
+  };
+  public shared ({ caller }) func getPost(id : PostId) : async ?Post {
+    return myPostings.getPost(id);
   };
 
   /**

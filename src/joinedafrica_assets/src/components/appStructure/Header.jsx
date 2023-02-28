@@ -71,7 +71,7 @@ export default function Header() {
             ) : (
               <>
                 <Link
-                  to="/auth/create-profile"
+                  to="/create-profile"
                   style={{ textDecoration: "none" }}
                 >
                   <Button variant="outlined">Create Profile</Button>

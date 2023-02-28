@@ -12,9 +12,11 @@ module {
     type Subcategory = Text;
     type Post = Type.Post;
     type Database = Type.Database;
+    type PostId = Type.PostId;
 
     public class PublishedPosts() {
-        var allPublishedPosts : Trie.Trie<Category, Trie.Trie<Subcategory, List.List<Post>>> = Trie.empty();
+        var postStructure : Trie.Trie<Category, Trie.Trie<Subcategory, List.List<Post>>> = Trie.empty();
+        var publishedPosts : Trie.Trie<PostId, Post> = Trie.empty();
 
         //initialie the database with the category and subcategory names
         public func createDatabase(allCategories : [Database]) {
@@ -23,11 +25,11 @@ module {
                 for (subcategory in category.subcategory.vals()) {
                     allSubCategories := Trie.put(allSubCategories, key(subcategory), Text.equal, List.nil()).0;
                 };
-                allPublishedPosts := Trie.put(allPublishedPosts, key(category.name), Text.equal, allSubCategories).0;
+                postStructure := Trie.put(postStructure, key(category.name), Text.equal, allSubCategories).0;
             };
         };
         public func get() : Trie.Trie<Category, Trie.Trie<Subcategory, List.List<Post>>> {
-            return allPublishedPosts;
+            return postStructure;
         };
 
     };

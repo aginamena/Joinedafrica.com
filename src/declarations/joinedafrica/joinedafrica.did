@@ -11,6 +11,7 @@ type Profile =
    lastName: text;
    profilePicture: vec nat8;
  };
+type PostId = text;
 type Post = 
  record {
    amount: text;
@@ -18,6 +19,7 @@ type Post =
    condition: text;
    creationDateOfPost: text;
    images: vec vec nat8;
+   postId: text;
    productDescription: text;
    productSpecification:
     record {
@@ -38,6 +40,7 @@ service : {
   createPost: (Post) -> ();
   createUserProfile: (Profile) -> (Result);
   getAllMyPostings: () -> (vec Post);
+  getPost: (PostId) -> (opt Post);
   getUserProfile: () -> (Result);
   whoAmI: () -> (UserId);
 }

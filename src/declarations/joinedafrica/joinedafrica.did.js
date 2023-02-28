@@ -18,6 +18,7 @@ export const idlFactory = ({ IDL }) => {
     'amount' : IDL.Text,
     'productDescription' : IDL.Text,
     'condition' : IDL.Text,
+    'postId' : IDL.Text,
     'images' : IDL.Vec(IDL.Vec(IDL.Nat8)),
   });
   const Profile = IDL.Record({
@@ -27,11 +28,13 @@ export const idlFactory = ({ IDL }) => {
     'firstName' : IDL.Text,
   });
   const Result = IDL.Variant({ 'ok' : Profile, 'err' : IDL.Text });
+  const PostId = IDL.Text;
   return IDL.Service({
     'allPrincipals' : IDL.Func([], [IDL.Vec(UserId)], []),
     'createPost' : IDL.Func([Post], [], []),
     'createUserProfile' : IDL.Func([Profile], [Result], []),
     'getAllMyPostings' : IDL.Func([], [IDL.Vec(Post)], []),
+    'getPost' : IDL.Func([PostId], [IDL.Opt(Post)], []),
     'getUserProfile' : IDL.Func([], [Result], []),
     'whoAmI' : IDL.Func([], [UserId], []),
   });

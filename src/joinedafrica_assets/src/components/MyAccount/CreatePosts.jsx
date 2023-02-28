@@ -63,9 +63,11 @@ export default function CreatePost() {
       return;
     }
     setIsLoading(true);
+    // const postId =;
     const post = {
       creationDateOfPost: new Date().toLocaleDateString(),
       category: selectedCategory,
+      postId: Math.random().toString(16).slice(2),
       subcategory: selectedSubcategory,
       productTitle,
       amount,
@@ -93,6 +95,7 @@ export default function CreatePost() {
     );
 
     post.images = imageBlobs;
+    console.log(post);
     await authenticatedUser.createPost(post);
     setIsLoading(false);
     alert("Your post has been created!");

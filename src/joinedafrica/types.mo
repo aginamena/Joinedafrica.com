@@ -4,6 +4,7 @@ import Text "mo:base/Text";
 module {
     public type Post = {
         creationDateOfPost : Text;
+        postId : Text;
         images : [[Nat8]];
         category : Text;
         subcategory : Text;
@@ -48,5 +49,6 @@ module {
         posts : [Post];
     };
     public type UserId = Principal;
+    public type PostId = Text;
 
 };

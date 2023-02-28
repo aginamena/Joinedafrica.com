@@ -45,7 +45,7 @@ export default function MyProfileMenu() {
       >
         <MenuItem>
           <Link
-            to="/home/myaccount"
+            to="/my-account"
             style={{ color: "white", textDecoration: "none" }}
           >
             My Account

@@ -8,6 +8,7 @@ import { AppContext } from "./context";
 import Body from "./components/appStructure/Body";
 import WelcomePage from "./components/welcomeToJoinedAfrica/WelcomePage";
 import CreateProfile from "./components/auth/CreateProfile";
+import ViewPost from "./components/views/ViewPost";
 
 export default function App() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
@@ -39,17 +40,14 @@ export default function App() {
           <Routes>
             <Route exact path="/" element={<WelcomePage />}></Route>
             <Route exact path="/home" element={<Body />}></Route>
-            <Route
+            {/* <Route
               exact
-              path="/home/view/:categoryName"
+              path="/home/product/:categoryName"
               element={<ViewCategory />}
-            />
-            <Route exact path="/home/myaccount" element={<MyAccount />} />
-            <Route
-              exact
-              path="auth/create-profile"
-              element={<CreateProfile />}
-            />
+            /> */}
+            <Route exact path="/my-account" element={<MyAccount />} />
+            <Route exact path="/view/:postId" element={<ViewPost />} />
+            <Route exact path="/create-profile" element={<CreateProfile />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
