@@ -32,6 +32,7 @@ export default function MyPostings() {
                   creationDateOfPost={posting.creationDateOfPost}
                   image={posting.images[0]}
                   productDescription={posting.productDescription}
+                  isPublished={posting.isPublished}
                 />
               </Grid>
             ))}

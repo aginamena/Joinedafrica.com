@@ -70,6 +70,7 @@ export default function CreatePost() {
       postId: Math.random().toString(16).slice(2),
       subcategory: selectedSubcategory,
       productTitle,
+      isPublished: false,
       amount,
       productDescription,
       condition,

@@ -5,6 +5,7 @@ module {
     public type Post = {
         creationDateOfPost : Text;
         postId : Text;
+        isPublished : Bool;
         images : [[Nat8]];
         category : Text;
         subcategory : Text;
