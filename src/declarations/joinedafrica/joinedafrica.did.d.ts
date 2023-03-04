@@ -19,10 +19,8 @@ export interface Post {
   'amount' : string,
   'productDescription' : string,
   'condition' : string,
-  'postId' : string,
   'images' : Array<Uint8Array>,
 }
-export type PostId = string;
 export interface Profile {
   'email' : string,
   'profilePicture' : Uint8Array,
@@ -37,7 +35,6 @@ export interface _SERVICE {
   'createPost' : ActorMethod<[Post], undefined>,
   'createUserProfile' : ActorMethod<[Profile], Result>,
   'getAllMyPostings' : ActorMethod<[], Array<Post>>,
-  'getPost' : ActorMethod<[PostId], [] | [Post]>,
   'getUserProfile' : ActorMethod<[], Result>,
   'whoAmI' : ActorMethod<[], UserId>,
 }
