@@ -11,33 +11,63 @@ type Profile =
    lastName: text;
    profilePicture: vec nat8;
  };
+type PostId = text;
 type Post = 
  record {
-   amount: text;
+   amount: nat;
    category: text;
    condition: text;
    creationDateOfPost: text;
    images: vec vec nat8;
+   isPublished: bool;
+   postId: text;
    productDescription: text;
    productSpecification:
-    record {
-      durationOfRenting: int;
-      gender: text;
-      hasParkingSpace: bool;
-      isFurnished: bool;
-      model: text;
-      nameOfManufacturer: text;
-      numberOfPlots: int;
-      yearOfManufacture: int;
+    variant {
+      Electronics:
+       record {
+         Model: text;
+         Name_of_manufacturer: text;
+         Year_of_manufacture: nat;
+       };
+      Fashion: record {Gender: text;};
+      Health_and_beauty: record {Gender: text;};
+      Mobile_phones_and_tables:
+       record {
+         Model: text;
+         Name_of_manufacturer: text;
+         Year_of_manufacture: nat;
+       };
+      Properties:
+       variant {
+         Houses_and_apartments_for_rent:
+          record {
+            Duration_of_rent_in_months: nat;
+            Furnished: bool;
+            Parking_space: bool;
+          };
+         Houses_and_apartments_for_sale:
+          record {
+            Furnished: bool;
+            Parking_space: bool;
+          };
+         Land_and_plots_for_sale: nat;
+       };
+      Vehicles:
+       record {
+         Model: text;
+         Name_of_manufacturer: text;
+         Year_of_manufacture: nat;
+       };
     };
    productTitle: text;
    subcategory: text;
  };
 service : {
-  allPrincipals: () -> (vec UserId);
   createPost: (Post) -> ();
   createUserProfile: (Profile) -> (Result);
   getAllMyPostings: () -> (vec Post);
+  getPost: (PostId) -> (opt Post);
   getUserProfile: () -> (Result);
   whoAmI: () -> (UserId);
 }

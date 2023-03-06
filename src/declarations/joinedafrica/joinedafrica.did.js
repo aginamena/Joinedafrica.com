@@ -1,23 +1,45 @@
 export const idlFactory = ({ IDL }) => {
-  const UserId = IDL.Principal;
   const Post = IDL.Record({
     'creationDateOfPost' : IDL.Text,
+    'isPublished' : IDL.Bool,
     'productTitle' : IDL.Text,
     'subcategory' : IDL.Text,
     'category' : IDL.Text,
-    'productSpecification' : IDL.Record({
-      'model' : IDL.Text,
-      'numberOfPlots' : IDL.Int,
-      'isFurnished' : IDL.Bool,
-      'hasParkingSpace' : IDL.Bool,
-      'yearOfManufacture' : IDL.Int,
-      'durationOfRenting' : IDL.Int,
-      'gender' : IDL.Text,
-      'nameOfManufacturer' : IDL.Text,
+    'productSpecification' : IDL.Variant({
+      'Mobile_phones_and_tables' : IDL.Record({
+        'Year_of_manufacture' : IDL.Nat,
+        'Model' : IDL.Text,
+        'Name_of_manufacturer' : IDL.Text,
+      }),
+      'Properties' : IDL.Variant({
+        'Land_and_plots_for_sale' : IDL.Nat,
+        'Houses_and_apartments_for_rent' : IDL.Record({
+          'Furnished' : IDL.Bool,
+          'Parking_space' : IDL.Bool,
+          'Duration_of_rent_in_months' : IDL.Nat,
+        }),
+        'Houses_and_apartments_for_sale' : IDL.Record({
+          'Furnished' : IDL.Bool,
+          'Parking_space' : IDL.Bool,
+        }),
+      }),
+      'Fashion' : IDL.Record({ 'Gender' : IDL.Text }),
+      'Electronics' : IDL.Record({
+        'Year_of_manufacture' : IDL.Nat,
+        'Model' : IDL.Text,
+        'Name_of_manufacturer' : IDL.Text,
+      }),
+      'Vehicles' : IDL.Record({
+        'Year_of_manufacture' : IDL.Nat,
+        'Model' : IDL.Text,
+        'Name_of_manufacturer' : IDL.Text,
+      }),
+      'Health_and_beauty' : IDL.Record({ 'Gender' : IDL.Text }),
     }),
-    'amount' : IDL.Text,
+    'amount' : IDL.Nat,
     'productDescription' : IDL.Text,
     'condition' : IDL.Text,
+    'postId' : IDL.Text,
     'images' : IDL.Vec(IDL.Vec(IDL.Nat8)),
   });
   const Profile = IDL.Record({
@@ -27,11 +49,13 @@ export const idlFactory = ({ IDL }) => {
     'firstName' : IDL.Text,
   });
   const Result = IDL.Variant({ 'ok' : Profile, 'err' : IDL.Text });
+  const PostId = IDL.Text;
+  const UserId = IDL.Principal;
   return IDL.Service({
-    'allPrincipals' : IDL.Func([], [IDL.Vec(UserId)], []),
     'createPost' : IDL.Func([Post], [], []),
     'createUserProfile' : IDL.Func([Profile], [Result], []),
     'getAllMyPostings' : IDL.Func([], [IDL.Vec(Post)], []),
+    'getPost' : IDL.Func([PostId], [IDL.Opt(Post)], []),
     'getUserProfile' : IDL.Func([], [Result], []),
     'whoAmI' : IDL.Func([], [UserId], []),
   });

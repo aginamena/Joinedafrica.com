@@ -19,7 +19,7 @@ export function CreatePostSpecification(
   if (
     categoryName === "Vehicles" ||
     categoryName === "Electronics" ||
-    categoryName === "Mobile phones & Tablets"
+    categoryName === "Mobile_phones_and_tablets"
   ) {
     return (
       <>
@@ -46,7 +46,7 @@ export function CreatePostSpecification(
       </>
     );
   }
-  if (categoryName === "Health & Beauty") {
+  if (categoryName === "Health_and_beauty") {
     return (
       <MultiSelect
         name="Gender"
@@ -55,10 +55,10 @@ export function CreatePostSpecification(
       />
     );
   }
-  if (categoryName === "Property") {
+  if (categoryName === "Properties") {
     if (
-      subCategoryName === "houses & apartments for sale" ||
-      subCategoryName === "houses & apartments for rent"
+      subCategoryName === "Houses_and_apartments_for_sale" ||
+      subCategoryName === "Houses_and_apartments_for_rent"
     ) {
       return (
         <>
@@ -74,7 +74,7 @@ export function CreatePostSpecification(
               setHasParkingSpace(hasParketingSpace)
             }
           />
-          {subCategoryName === "houses & apartments for rent" && (
+          {subCategoryName === "Houses_and_apartments_for_rent" && (
             <TextField
               required
               id="outlined-number"
@@ -87,7 +87,7 @@ export function CreatePostSpecification(
         </>
       );
     }
-    if (subCategoryName === "land & plots for sale") {
+    if (subCategoryName === "Land_and_plots_for_sale") {
       return (
         <TextField
           required
@@ -99,6 +99,15 @@ export function CreatePostSpecification(
         />
       );
     }
+  }
+  if (categoryName === "Fashion") {
+    return (
+      <MultiSelect
+        name="Gender"
+        listOfElements={["male", "female", "unisex"]}
+        clickedValue={(gender) => setGender(gender)}
+      />
+    );
   }
   return null;
 }

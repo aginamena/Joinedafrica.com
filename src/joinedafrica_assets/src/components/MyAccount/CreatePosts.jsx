@@ -17,6 +17,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { AppContext } from "../../context";
 import { MultiSelect } from "../../util/reuseableComponents/MultiSelect";
 import { LoadingCmp } from "../../util/reuseableComponents/LoadingCmp";
+import { joinedafrica } from "../../../../declarations/joinedafrica/index";
 
 export default function CreatePost() {
   const [categories, setCategories] = useState(getCategoryNames());
@@ -50,7 +51,73 @@ export default function CreatePost() {
     }
     setSelectedImages([...selectedImages, event.target.files[0]]);
   }
-
+  function createProductSpecification() {
+    if (selectedCategory == "Vehicles") {
+      return {
+        Vehicles: {
+          Year_of_manufacture: parseInt(yearOfManufacture),
+          Name_of_manufacturer: nameOfManufacturer,
+          Model: model,
+        },
+      };
+    } else if (selectedCategory == "Electronics") {
+      return {
+        Electronics: {
+          Year_of_manufacture: parseInt(yearOfManufacture),
+          Name_of_manufacturer: nameOfManufacturer,
+          Model: model,
+        },
+      };
+    } else if (selectedCategory == "Health_and_beauty") {
+      return {
+        Health_and_beauty: {
+          Gender: gender,
+        },
+      };
+    } else if (selectedCategory == "Mobile_phones_and_tablets") {
+      return {
+        Mobile_phones_and_tablets: {
+          Year_of_manufacture: parseInt(yearOfManufacture),
+          Name_of_manufacturer: nameOfManufacturer,
+          Model: model,
+        },
+      };
+    } else if (selectedCategory == "Fashion") {
+      return {
+        Fashion: {
+          Gender: gender,
+        },
+      };
+    } else if (selectedCategory == "Properties") {
+      if (selectedSubcategory == "Houses_and_apartments_for_rent") {
+        return {
+          Properties: {
+            Houses_and_apartments_for_rent: {
+              Furnished: isFurnished == "yes",
+              Parking_space: hasParkingSpace == "yes",
+              Duration_of_rent_in_months: parseInt(durationOfRenting),
+            },
+          },
+        };
+      }
+      if (selectedSubcategory == "Houses_and_apartments_for_sale") {
+        return {
+          Properties: {
+            Houses_and_apartments_for_sale: {
+              Furnished: isFurnished == "yes",
+              Parking_space: hasParkingSpace == "yes",
+            },
+          },
+        };
+      } else {
+        return {
+          Properties: {
+            Land_and_plots_for_sale: parseInt(numberOfPlots),
+          },
+        };
+      }
+    }
+  }
   // sends the created post to the backend but the user has to be authenticated first using the internet identity
   async function createPost(event) {
     event.preventDefault();
@@ -64,25 +131,48 @@ export default function CreatePost() {
     }
     setIsLoading(true);
     // const postId =;
-    const post = {
+    // const post = {
+    //   creationDateOfPost: new Date().toLocaleDateString(),
+    //   category: selectedCategory,
+    //   postId: Math.random().toString(16).slice(2),
+    //   subcategory: selectedSubcategory,
+    //   productTitle,
+    //   isPublished: false,
+    //   amount,
+    //   productDescription,
+    //   condition,
+    //   productSpecification: {
+    //     yearOfManufacture: parseInt(yearOfManufacture),
+    //     model,
+    //     nameOfManufacturer,
+    //     gender,
+    //     isFurnished: isFurnished === "yes",
+    //     hasParkingSpace: hasParkingSpace === "yes",
+    //     numberOfPlots: parseInt(numberOfPlots),
+    //     durationOfRenting: parseInt(durationOfRenting),
+    //   },
+    // };
+
+    const post2 = {
       creationDateOfPost: new Date().toLocaleDateString(),
       category: selectedCategory,
       postId: Math.random().toString(16).slice(2),
       subcategory: selectedSubcategory,
       productTitle,
       isPublished: false,
-      amount,
+      amount: parseInt(amount),
       productDescription,
       condition,
       productSpecification: {
-        yearOfManufacture: parseInt(yearOfManufacture),
-        model,
-        nameOfManufacturer,
-        gender,
-        isFurnished: isFurnished === "yes",
-        hasParkingSpace: hasParkingSpace === "yes",
-        numberOfPlots: parseInt(numberOfPlots),
-        durationOfRenting: parseInt(durationOfRenting),
+        ...createProductSpecification(),
+        // yearOfManufacture: parseInt(yearOfManufacture),
+        // model,
+        // nameOfManufacturer,
+        // gender,
+        // isFurnished: isFurnished === "yes",
+        // hasParkingSpace: hasParkingSpace === "yes",
+        // numberOfPlots: parseInt(numberOfPlots),
+        // durationOfRenting: parseInt(durationOfRenting),
       },
     };
 
@@ -95,9 +185,12 @@ export default function CreatePost() {
       })
     );
 
-    post.images = imageBlobs;
-    console.log(post);
-    await authenticatedUser.createPost(post);
+    post2.images = imageBlobs;
+    console.log(post2);
+    const result =
+      process.env.NODE_ENV == "development"
+        ? await joinedafrica.createPost(post2)
+        : await authenticatedUser.createPost(post2);
     setIsLoading(false);
     alert("Your post has been created!");
     //go to my postings page
@@ -169,6 +262,7 @@ export default function CreatePost() {
               style={{ width: "100%" }}
               id="outlined-adornment-amount"
               required
+              type="number"
               startAdornment={
                 <InputAdornment position="start">BTC</InputAdornment>
               }

@@ -1,76 +1,60 @@
 import Cat "types";
 module {
-    type Database = Cat.Database;
-
-    public let Database : [Database] = [
+    public let Database : [Cat.Database] = [
         {
             name = "Vehicles";
             subcategory = [
-                "cars",
-                "buses",
-                "trucks & trailers",
-                "vehicle parts & assessories",
-                "motocycles",
+                "Cars",
+                "Buses",
+                "Trucks_and_trailers",
+                "Vehicle_parts_and_assessories",
+                "Motocycle_and_bicycles",
             ];
         },
         {
             name = "Electronics";
             subcategory = [
-                "computers & laptops",
-
-                "electronic supplies",
-                "audio & music equipment",
-
-                "computer accessories",
-
-                "radio & home audio",
-                "tv & dvd equipment",
+                "Computers_and_laptops",
+                "Electronic_supplies",
+                "Audio_and_music_equipments",
+                "Computer_accessories",
+                "Radio_and_home_audio",
+                "Tv_and_dvd_equipment",
             ];
         },
         {
-            name = "Health & Beauty";
+            name = "Health_and_beauty";
             subcategory = [
-                "skincare",
-
-                "hair products",
-
-                "bath & body",
-
-                "fragrances",
-
-                "vitamins & supplements",
+                "Skincare",
+                "Hair_products",
+                "Bath_and_body",
+                "Fragrances",
+                "Vitamins_and_supplements",
             ];
         },
         {
-            name = "Mobile phones & Tablets";
+            name = "Mobile_phones_and_tablets";
             subcategory = [
-                "phones",
-
-                "tablets",
-
-                "accessories for mobile phones & tablets",
+                "Phones",
+                "Tablets",
+                "Accessories_for_mobile_phones_and_tablets",
             ];
         },
         {
-            name = "Property";
+            name = "Properties";
             subcategory = [
-                "houses & apartments for rent",
-
-                "houses & apartments for sale",
-
-                "land & plots for sale",
+                "Houses_and_apartments_for_rent",
+                "Houses_and_apartments_for_sale",
+                "Land_and_plots_for_sale",
             ];
         },
         {
             name = "Fashion";
             subcategory = [
-                "bags",
-
-                "clothing & clothing-accessories",
-
-                "jewelry",
-
-                "shoes",
+                "Bags",
+                "Clothing_and_clothing_accessories",
+                "Jewelries",
+                "Shoes",
             ];
         },
     ];

@@ -3,7 +3,7 @@ import { Box, Grid } from "@mui/material";
 import { AppContext } from "../../context";
 import { LoadingCmp } from "../../util/reuseableComponents/LoadingCmp";
 import PostingCard from "../../util/reuseableComponents/PostingCard";
-
+import { joinedafrica } from "../../../../declarations/joinedafrica/index";
 export default function MyPostings() {
   const [isLoading, setIsLoading] = useState(false);
   const { authenticatedUser } = useContext(AppContext);
@@ -11,7 +11,11 @@ export default function MyPostings() {
   useEffect(() => {
     async function getAllMyPostings() {
       setIsLoading(true);
-      setMyPostings(await authenticatedUser.getAllMyPostings());
+      if (process.env.NODE_ENV == "development") {
+        setMyPostings(await joinedafrica.getAllMyPostings());
+      } else {
+        setMyPostings(await authenticatedUser.getAllMyPostings());
+      }
       setIsLoading(false);
     }
     getAllMyPostings();

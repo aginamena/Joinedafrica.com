@@ -28,9 +28,7 @@ module {
             };
 
         };
-        func key(t : UserId) : Trie.Key<UserId> {
-            { hash = Principal.hash(t); key = t };
-        };
+
         public func getUserProfile(caller : UserId) : Result<Profile, Text> {
             switch (Trie.get(userProfiles, key(caller), Principal.equal)) {
                 case null #err("User doesn't exists");
@@ -44,15 +42,9 @@ module {
             };
 
         };
-        //test function
-        public func allPrincipals() : [UserId] {
-            let iter = Trie.iter(userProfiles);
-            var arr : [UserId] = [];
-            for ((k, v) in iter) {
-                arr := Array.append(arr, [k]);
-            };
-            return arr;
 
+                func key(t : UserId) : Trie.Key<UserId> {
+            { hash = Principal.hash(t); key = t };
         };
 
     };
