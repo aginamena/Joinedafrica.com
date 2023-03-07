@@ -46,15 +46,17 @@
     "last 2 edge version"
   ],
   "dependencies": {
-    "@dfinity/auth-client": "^0.15.1",
     "@dfinity/assets": "0.15.1",
+    "@dfinity/auth-client": "^0.15.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.2",
     "@mui/x-date-pickers": "^5.0.17",
+    "bootstrap": "^5.2.3",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
+    "react-bootstrap": "^2.7.2",
     "react-router-dom": "^6.6.2"
   }
 }

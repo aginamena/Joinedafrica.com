@@ -130,30 +130,7 @@ export default function CreatePost() {
       return;
     }
     setIsLoading(true);
-    // const postId =;
-    // const post = {
-    //   creationDateOfPost: new Date().toLocaleDateString(),
-    //   category: selectedCategory,
-    //   postId: Math.random().toString(16).slice(2),
-    //   subcategory: selectedSubcategory,
-    //   productTitle,
-    //   isPublished: false,
-    //   amount,
-    //   productDescription,
-    //   condition,
-    //   productSpecification: {
-    //     yearOfManufacture: parseInt(yearOfManufacture),
-    //     model,
-    //     nameOfManufacturer,
-    //     gender,
-    //     isFurnished: isFurnished === "yes",
-    //     hasParkingSpace: hasParkingSpace === "yes",
-    //     numberOfPlots: parseInt(numberOfPlots),
-    //     durationOfRenting: parseInt(durationOfRenting),
-    //   },
-    // };
-
-    const post2 = {
+    const post = {
       creationDateOfPost: new Date().toLocaleDateString(),
       category: selectedCategory,
       postId: Math.random().toString(16).slice(2),
@@ -165,14 +142,6 @@ export default function CreatePost() {
       condition,
       productSpecification: {
         ...createProductSpecification(),
-        // yearOfManufacture: parseInt(yearOfManufacture),
-        // model,
-        // nameOfManufacturer,
-        // gender,
-        // isFurnished: isFurnished === "yes",
-        // hasParkingSpace: hasParkingSpace === "yes",
-        // numberOfPlots: parseInt(numberOfPlots),
-        // durationOfRenting: parseInt(durationOfRenting),
       },
     };
 
@@ -185,12 +154,10 @@ export default function CreatePost() {
       })
     );
 
-    post2.images = imageBlobs;
-    console.log(post2);
-    const result =
-      process.env.NODE_ENV == "development"
-        ? await joinedafrica.createPost(post2)
-        : await authenticatedUser.createPost(post2);
+    post.images = imageBlobs;
+    process.env.NODE_ENV == "development"
+      ? await joinedafrica.createPost(post)
+      : await authenticatedUser.createPost(post);
     setIsLoading(false);
     alert("Your post has been created!");
     //go to my postings page

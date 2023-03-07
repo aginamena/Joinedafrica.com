@@ -13,11 +13,6 @@ import {
 } from "../../styling/auth/CreateProfile";
 import { joinedafrica } from "../../../../declarations/joinedafrica/index";
 
-/**
- * New users are able to create their profile by setting their email, first and last name and profile picture.
- * They also have to set up their identity using internet identity.
- */
-
 export default function CreateProfile() {
   const [actor, setActor] = useState(null);
   const [userProfile, setUserProfile] = useState({

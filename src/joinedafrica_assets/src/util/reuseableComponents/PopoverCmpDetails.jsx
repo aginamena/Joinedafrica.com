@@ -6,12 +6,14 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function PopoverCmpDetails({ isPublished }) {
+export default function PopoverCmpDetails({ isPublished, postId }) {
+  const navigate = useNavigate();
   return (
     <List>
       <ListItem disablePadding>
-        <ListItemButton component="a" href="#simple-list">
+        <ListItemButton onClick={() => navigate("view/" + postId)}>
           <ListItemText primary="View created post" />
         </ListItemButton>
       </ListItem>

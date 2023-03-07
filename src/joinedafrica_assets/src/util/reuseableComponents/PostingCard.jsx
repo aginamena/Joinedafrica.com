@@ -31,6 +31,7 @@ export default function PostingCard({
   image,
   productDescription,
   isPublished,
+  postId,
 }) {
   const { userProfile } = useContext(AppContext);
 
@@ -91,6 +92,7 @@ export default function PostingCard({
         setPopupPosition={setPopupPosition}
         popupPosition={popupPosition}
         isPublished={isPublished}
+        postId={postId}
       />
     </>
   );

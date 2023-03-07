@@ -40,13 +40,12 @@ export default function App() {
           <Routes>
             <Route exact path="/" element={<WelcomePage />}></Route>
             <Route exact path="/home" element={<Body />}></Route>
-            {/* <Route
-              exact
-              path="/home/product/:categoryName"
-              element={<ViewCategory />}
-            /> */}
             <Route exact path="/my-account" element={<MyAccount />} />
-            <Route exact path="/view/:postId" element={<ViewPost />} />
+            <Route
+              exact
+              path="/my-account/view/:postId"
+              element={<ViewPost />}
+            />
             <Route exact path="/create-profile" element={<CreateProfile />} />
           </Routes>
         </BrowserRouter>

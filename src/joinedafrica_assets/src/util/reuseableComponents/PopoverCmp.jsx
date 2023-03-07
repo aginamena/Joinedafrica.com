@@ -2,7 +2,12 @@ import React from "react";
 import { Popover } from "@mui/material/";
 import PopoverCmpDetails from "./PopoverCmpDetails";
 
-export default function PopoverCmp({ popupPosition, setPopupPosition, isPublished }) {
+export default function PopoverCmp({
+  popupPosition,
+  setPopupPosition,
+  isPublished,
+  postId,
+}) {
   return (
     <Popover
       open={Boolean(popupPosition)}
@@ -13,7 +18,7 @@ export default function PopoverCmp({ popupPosition, setPopupPosition, isPublishe
         horizontal: "right",
       }}
     >
-      <PopoverCmpDetails isPublished = {isPublished}/>
+      <PopoverCmpDetails isPublished={isPublished} postId={postId} />
     </Popover>
   );
 }
