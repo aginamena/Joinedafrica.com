@@ -39,16 +39,13 @@ export default function PostingCard({
   const MAX_LENGTH_OF_DESCRIPTION = 150;
   const MAX_lENGTH_OF_TITLE = 25;
 
-  const profilePictureURL = URL.createObjectURL(
-    new Blob([userProfile.profilePicture], { type: "image/png" })
-  );
   const [popupPosition, setPopupPosition] = useState(null);
 
   return (
     <>
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
-          avatar={<Avatar src={profilePictureURL} />}
+          avatar={<Avatar src={userProfile.profilePicture} />}
           action={
             <IconButton
               onClick={(event) => setPopupPosition(event.currentTarget)}

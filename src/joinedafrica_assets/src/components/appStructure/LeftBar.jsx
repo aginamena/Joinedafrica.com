@@ -24,12 +24,11 @@ export default function LeftBar() {
           <ListItem key={index} disablePadding>
             <Link
               style={{ color: "white", textDecoration: "none" }}
-              // replacing every space with '-" and turns the category name to lowercase
-              to={`view/${category.name.replace(/\s+/g, "-").toLowerCase()}`}
+              to={`view/${category.name.toLowerCase()}`}
             >
               <ListItemButton>
                 <ListItemIcon>{category.icon}</ListItemIcon>
-                <ListItemText primary={category.name} />
+                <ListItemText primary={category.name.replaceAll("_", " ")} />
               </ListItemButton>
             </Link>
           </ListItem>

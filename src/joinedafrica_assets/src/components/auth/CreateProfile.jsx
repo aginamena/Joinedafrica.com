@@ -15,7 +15,7 @@ import { joinedafrica } from "../../../../declarations/joinedafrica/index";
 
 export default function CreateProfile() {
   const [actor, setActor] = useState(null);
-  const [userProfile, setUserProfile] = useState({
+  const [userProfile, setProfile] = useState({
     profilePicture: null,
     firstName: "",
     lastName: "",
@@ -24,7 +24,7 @@ export default function CreateProfile() {
   const [isLoading, setIsLoading] = useState(false);
 
   // after the user authenticates using the internet Identity, we store the authenticated actor in app state
-  const { setAuthenticatedUser } = useContext(AppContext);
+  const { setAuthenticatedUser, setUserProfile } = useContext(AppContext);
 
   // navigation so we can go back to the home page after saving the users profile
   const navigate = useNavigate();
@@ -36,16 +36,10 @@ export default function CreateProfile() {
       return;
     }
     setIsLoading(true);
-
-    const imageToBinary = new Uint8Array(
+    const createdProfile = { ...userProfile };
+    createdProfile.profilePicture = new Uint8Array(
       await userProfile.profilePicture.arrayBuffer()
     );
-    const createdProfile = {
-      profilePicture: imageToBinary,
-      firstName: userProfile.firstName,
-      lastName: userProfile.lastName,
-      email: userProfile.email,
-    };
     const result =
       process.env.NODE_ENV == "development"
         ? await joinedafrica.createUserProfile(createdProfile)
@@ -54,6 +48,11 @@ export default function CreateProfile() {
       alert(result.err);
     } else {
       setAuthenticatedUser(actor);
+      //converting the image array back to url for the home page image
+      createdProfile.profilePicture = URL.createObjectURL(
+        new Blob([createdProfile.profilePicture], { type: "image/png" })
+      );
+      setUserProfile(createdProfile);
       navigate("/home");
     }
     setIsLoading(false);
@@ -83,7 +82,7 @@ export default function CreateProfile() {
             accept="image/*"
             required
             onChange={(e) =>
-              setUserProfile({
+              setProfile({
                 ...userProfile,
                 profilePicture: e.target.files[0],
               })
@@ -98,7 +97,7 @@ export default function CreateProfile() {
           style={{ marginTop: "30px" }}
           required
           onChange={(e) =>
-            setUserProfile({ ...userProfile, firstName: e.target.value })
+            setProfile({ ...userProfile, firstName: e.target.value })
           }
         />
         <TextField
@@ -108,7 +107,7 @@ export default function CreateProfile() {
           style={{ margin: "30px 0" }}
           required
           onChange={(e) =>
-            setUserProfile({ ...userProfile, lastName: e.target.value })
+            setProfile({ ...userProfile, lastName: e.target.value })
           }
         />
         <TextField
@@ -118,7 +117,7 @@ export default function CreateProfile() {
           variant="outlined"
           required
           onChange={(e) =>
-            setUserProfile({ ...userProfile, email: e.target.value })
+            setProfile({ ...userProfile, email: e.target.value })
           }
         />
         <IdentitySetup onClick={() => InternetIdentityAuthentication(setActor)}>

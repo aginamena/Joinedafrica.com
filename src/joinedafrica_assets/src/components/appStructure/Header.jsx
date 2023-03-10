@@ -22,7 +22,7 @@ import { LoadingCmp } from "../../util/reuseableComponents/LoadingCmp";
 import { joinedafrica } from "../../../../declarations/joinedafrica/index";
 
 export default function Header() {
-  const { authenticatedUser, setAuthenticatedUser, userProfile } =
+  const { authenticatedUser, setAuthenticatedUser, setUserProfile } =
     useContext(AppContext);
   const [actor, setActor] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,10 +36,21 @@ export default function Header() {
           process.env.NODE_ENV == "development"
             ? await joinedafrica.getUserProfile()
             : await actor.getUserProfile();
+        console.log("from header");
+        console.log(result);
         if (result?.err) {
           alert(result.err);
         } else {
           setAuthenticatedUser(actor);
+          const profile = { ...result.ok };
+          {
+            /* converting the uint8array back to an image */
+          }
+
+          profile.profilePicture = URL.createObjectURL(
+            new Blob([profile.profilePicture], { type: "image/png" })
+          );
+          setUserProfile({ ...profile });
         }
         setIsLoading(false);
       }

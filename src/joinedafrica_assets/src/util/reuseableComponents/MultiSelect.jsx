@@ -15,7 +15,7 @@ export function MultiSelect({ name, listOfElements, clickedValue }) {
         >
           {listOfElements.map((name, index) => (
             <MenuItem value={name} key={index}>
-              {name}
+              {name.replaceAll("_", " ")}
             </MenuItem>
           ))}
         </Select>

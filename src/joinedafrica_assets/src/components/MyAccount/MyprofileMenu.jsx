@@ -27,12 +27,7 @@ export default function MyProfileMenu() {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        {/* converting the uint8array back to an image */}
-        <Avatar
-          src={URL.createObjectURL(
-            new Blob([userProfile.profilePicture], { type: "image/png" })
-          )}
-        />
+        <Avatar src={userProfile.profilePicture} />
       </Button>
       <Menu
         id="basic-menu"

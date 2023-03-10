@@ -6,7 +6,7 @@ export default function CarouselCmp({ images }) {
     <Carousel>
       {images.map((image, index) => (
         <Carousel.Item key={index}>
-          <img className="d-block w-100" src={image} />
+          <img src={image} style={{ height: "400px" }} />
         </Carousel.Item>
       ))}
     </Carousel>
