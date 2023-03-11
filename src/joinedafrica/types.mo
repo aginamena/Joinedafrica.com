@@ -39,7 +39,7 @@ module {
         category : Text;
         subcategory : Text;
         productTitle : Text;
-        amount : Nat;
+        amount : Text;
         productDescription : Text;
         condition : Text;
         //very specific description of a post
@@ -64,13 +64,13 @@ module {
             };
             #Properties : {
                 #Houses_and_apartments_for_rent : {
-                    Furnished : Bool;
-                    Parking_space : Bool;
+                    Furnished : Text;
+                    Parking_space : Text;
                     Duration_of_rent_in_months : Nat;
                 };
                 #Houses_and_apartments_for_sale : {
-                    Furnished : Bool;
-                    Parking_space : Bool;
+                    Furnished : Text;
+                    Parking_space : Text;
                 };
                 #Land_and_plots_for_sale : Nat;
             };

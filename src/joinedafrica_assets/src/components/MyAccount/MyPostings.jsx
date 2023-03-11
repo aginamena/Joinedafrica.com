@@ -38,6 +38,7 @@ export default function MyPostings() {
                   productDescription={posting.productDescription}
                   isPublished={posting.isPublished}
                   postId={posting.postId}
+                  amount={posting.amount}
                 />
               </Grid>
             ))}

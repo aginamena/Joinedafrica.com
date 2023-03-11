@@ -14,13 +14,13 @@ export const idlFactory = ({ IDL }) => {
       'Properties' : IDL.Variant({
         'Land_and_plots_for_sale' : IDL.Nat,
         'Houses_and_apartments_for_rent' : IDL.Record({
-          'Furnished' : IDL.Bool,
-          'Parking_space' : IDL.Bool,
+          'Furnished' : IDL.Text,
+          'Parking_space' : IDL.Text,
           'Duration_of_rent_in_months' : IDL.Nat,
         }),
         'Houses_and_apartments_for_sale' : IDL.Record({
-          'Furnished' : IDL.Bool,
-          'Parking_space' : IDL.Bool,
+          'Furnished' : IDL.Text,
+          'Parking_space' : IDL.Text,
         }),
       }),
       'Fashion' : IDL.Record({ 'Gender' : IDL.Text }),
@@ -36,7 +36,7 @@ export const idlFactory = ({ IDL }) => {
       }),
       'Health_and_beauty' : IDL.Record({ 'Gender' : IDL.Text }),
     }),
-    'amount' : IDL.Nat,
+    'amount' : IDL.Text,
     'productDescription' : IDL.Text,
     'condition' : IDL.Text,
     'postId' : IDL.Text,

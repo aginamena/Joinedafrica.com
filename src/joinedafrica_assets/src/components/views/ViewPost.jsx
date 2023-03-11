@@ -60,20 +60,47 @@ export default function ViewPost() {
               {/* right component */}
               <Box style={{ width: "600px" }}>
                 <CarouselCmp images={postImages} />
-                <Box>
-                  <Typography variant="h4" gutterBottom>
-                    {post.productTitle}
-                  </Typography>
+                <Box style={{ margin: "30px 0" }}>
+                  <Box style={{ marginBottom: "20px" }}>
+                    <Typography gutterBottom>{post.productTitle}</Typography>
+                    <Typography style={{ color: "#37a864" }}>
+                      {post.amount} BTC
+                    </Typography>
+                  </Box>
+
                   {Object.entries(productSpecification).map(
                     ([specification, value], index) => (
-                      <Box style={{ display: "flex" }} key={index}>
-                        <Typography>
+                      <Box
+                        style={{
+                          display: "flex",
+                          color: "rgba(255, 255, 255, 0.7)",
+                        }}
+                        key={index}
+                      >
+                        <Typography style={{ marginRight: "10px" }}>
                           {specification.replaceAll("_", " ")} :
                         </Typography>
                         <Typography>{value.toString()}</Typography>
                       </Box>
                     )
                   )}
+                  <Box
+                    style={{
+                      display: "flex",
+                      color: "rgba(255, 255, 255, 0.7)",
+                    }}
+                  >
+                    <Typography style={{ marginRight: "10px" }}>
+                      Condition :
+                    </Typography>
+                    <Typography> {post.condition}</Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="h6" style={{ margin: "20px 0" }}>
+                      Description
+                    </Typography>
+                    <Typography>{post.productDescription}</Typography>
+                  </Box>
                 </Box>
               </Box>
               {/* left component */}

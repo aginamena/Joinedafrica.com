@@ -14,7 +14,7 @@ type Profile =
 type PostId = text;
 type Post = 
  record {
-   amount: text;
+   amount: nat;
    category: text;
    condition: text;
    creationDateOfPost: text;
@@ -43,13 +43,13 @@ type Post =
          Houses_and_apartments_for_rent:
           record {
             Duration_of_rent_in_months: nat;
-            Furnished: text;
-            Parking_space: text;
+            Furnished: bool;
+            Parking_space: bool;
           };
          Houses_and_apartments_for_sale:
           record {
-            Furnished: text;
-            Parking_space: text;
+            Furnished: bool;
+            Parking_space: bool;
           };
          Land_and_plots_for_sale: nat;
        };

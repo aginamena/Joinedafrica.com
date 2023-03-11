@@ -93,8 +93,8 @@ export default function CreatePost() {
         return {
           Properties: {
             Houses_and_apartments_for_rent: {
-              Furnished: isFurnished == "yes",
-              Parking_space: hasParkingSpace == "yes",
+              Furnished: isFurnished,
+              Parking_space: hasParkingSpace,
               Duration_of_rent_in_months: parseInt(durationOfRenting),
             },
           },
@@ -104,8 +104,8 @@ export default function CreatePost() {
         return {
           Properties: {
             Houses_and_apartments_for_sale: {
-              Furnished: isFurnished == "yes",
-              Parking_space: hasParkingSpace == "yes",
+              Furnished: isFurnished,
+              Parking_space: hasParkingSpace,
             },
           },
         };
@@ -137,7 +137,7 @@ export default function CreatePost() {
       subcategory: selectedSubcategory,
       productTitle,
       isPublished: false,
-      amount: parseInt(amount),
+      amount,
       productDescription,
       condition,
       productSpecification: {
@@ -230,6 +230,7 @@ export default function CreatePost() {
               id="outlined-adornment-amount"
               required
               type="number"
+              inputProps={{ min: "0", step: "any" }}
               startAdornment={
                 <InputAdornment position="start">BTC</InputAdornment>
               }

@@ -18,15 +18,15 @@ export interface Post {
       'Properties' : { 'Land_and_plots_for_sale' : bigint } |
         {
           'Houses_and_apartments_for_rent' : {
-            'Furnished' : boolean,
-            'Parking_space' : boolean,
+            'Furnished' : string,
+            'Parking_space' : string,
             'Duration_of_rent_in_months' : bigint,
           }
         } |
         {
           'Houses_and_apartments_for_sale' : {
-            'Furnished' : boolean,
-            'Parking_space' : boolean,
+            'Furnished' : string,
+            'Parking_space' : string,
           }
         }
     } |
@@ -46,7 +46,7 @@ export interface Post {
       }
     } |
     { 'Health_and_beauty' : { 'Gender' : string } },
-  'amount' : bigint,
+  'amount' : string,
   'productDescription' : string,
   'condition' : string,
   'postId' : string,
