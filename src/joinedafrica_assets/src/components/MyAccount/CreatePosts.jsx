@@ -191,9 +191,16 @@ export default function CreatePost() {
         <Typography style={{ marginBottom: "10px" }}>Add image(s)</Typography>
         <PostImage>
           <Box>
-            <input type="file" accept="image/*" onChange={addImages} required />
+            <input
+              type="file"
+              accept="image/jpeg, image/png"
+              onChange={addImages}
+              required
+            />
 
-            <Typography>Add some images. You can add up to 3 images</Typography>
+            <Typography>
+              Add some images. You can add up to 3 images. Jpeg or Png only.
+            </Typography>
           </Box>
         </PostImage>
         <Divider />

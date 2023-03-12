@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Container, Stack, Box, Typography } from "@mui/material";
+import { Container, Button, Box, Typography, TextField } from "@mui/material";
 import { AppContext } from "../../context";
 import { joinedafrica } from "../../../../declarations/joinedafrica/index";
 import { useParams } from "react-router";
@@ -7,6 +7,17 @@ import Header from "../appStructure/Header";
 import { LoadingCmp } from "../../util/reuseableComponents/LoadingCmp";
 import CarouselCmp from "../../util/reuseableComponents/CarouselCmp";
 import { extractProductSpecification } from "../../util/functions";
+import { styled } from "@mui/material/styles";
+
+const MessageCmp = styled(Box)({
+  width: "300px",
+  display: "flex",
+  flexDirection: "column",
+  JustifyContent: "center",
+  ".MuiFormControl-root": {
+    width: "100%",
+  },
+});
 
 export default function ViewPost() {
   const [post, setPost] = useState({});
@@ -56,7 +67,7 @@ export default function ViewPost() {
           LoadingCmp(loading)
         ) : (
           <>
-            <Stack direction="row">
+            <Box style={{ display: "flex", justifyContent: "space-between" }}>
               {/* right component */}
               <Box style={{ width: "600px" }}>
                 <CarouselCmp images={postImages} />
@@ -104,8 +115,18 @@ export default function ViewPost() {
                 </Box>
               </Box>
               {/* left component */}
-              <Box></Box>
-            </Stack>
+              <MessageCmp>
+                <TextField
+                  placeholder="Send a message to the creator of the post."
+                  multiline
+                  rows={7}
+                  style={{ marginBottom: "15px" }}
+                />
+                <Button variant="outlined" style={{ height: "50px" }}>
+                  Send message
+                </Button>
+              </MessageCmp>
+            </Box>
           </>
         )}
       </Container>
